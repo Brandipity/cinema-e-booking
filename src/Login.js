@@ -40,7 +40,7 @@ function Login() {
         <div className="options-section">
           <h2>Options</h2>
           <ul>
-            <li><button>Create Account</button></li>
+            <li><button><Link to="/createaccount">Create Account</Link></button></li>
             <li><button><Link to="/guest">Continue as Guest</Link></button></li>
             <li><button>Contact</button></li>
           </ul>

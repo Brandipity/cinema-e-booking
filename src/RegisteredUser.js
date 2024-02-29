@@ -1,9 +1,9 @@
-// GuestPage.js
+// RegisteredUser.js
 
 import React from 'react';
-import './GuestPage.css';
+import './RegisteredUser.css';
 
-function GuestPage() {
+function RegisteredUser() {
   return (
     <div className="App">
       {/* Navbar */}
@@ -42,7 +42,7 @@ function GuestPage() {
           <ul>
             <li><a href="/login">Login</a></li>
             <li><a href="/createaccount">Create Account</a></li>
-            <li><a href="/registereduser">Manage Account</a></li>
+            <li>View Theaters</li>
           </ul>
         </div>
 

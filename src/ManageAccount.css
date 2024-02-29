@@ -49,13 +49,12 @@ body {
   }
   
   .main-content {
-    color: white;
+    color: #f0f0f0;
     padding: 30px;
   }
-
+  
   .footer {
     display: flex;
-    color: #333;
     justify-content: space-around;
     background-color: #f0f0f0;
     padding: 20px;
@@ -77,4 +76,7 @@ body {
   .footer li {
     margin-bottom: 5px;
     cursor: pointer;
-  }  
+    color: #333;
+  }
+  
+  
