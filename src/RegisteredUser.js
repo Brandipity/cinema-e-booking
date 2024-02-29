@@ -3,6 +3,7 @@
 import React from 'react';
 import './RegisteredUser.css';
 
+
 function RegisteredUser() {
   return (
     <div className="App">
@@ -15,9 +16,8 @@ function RegisteredUser() {
           <input type="text" placeholder="Search" />
         </div>
         <div className="navbar-right">
-          <a href="#">Home</a>
+          <a href="/registereduser">Home</a>
           <a href="#">Showings</a>
-          <a href="/login">Login</a>
           <button>Cart</button>
         </div>
       </nav>
@@ -40,9 +40,7 @@ function RegisteredUser() {
         <div className="footer-category">
           <h3>Account</h3>
           <ul>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/createaccount">Create Account</a></li>
-            <li>View Theaters</li>
+            <li><a href="/ManageAccount">Manage Account</a></li>
           </ul>
         </div>
 
@@ -66,4 +64,4 @@ function RegisteredUser() {
   );
 }
 
-export default GuestPage;
+export default RegisteredUser;
