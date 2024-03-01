@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
@@ -26,6 +25,7 @@ body {
 .navbar-left span {
   font-size: 1.5em;
 }
+
 .navbar-right a,
 .navbar-right button {
   color: white;
@@ -42,27 +42,7 @@ body {
   color: #f0f0f0;
   padding: 30px;
 }
-.footer {
-  display: flex;
-  justify-content: space-around;
-  background-color: #f0f0f0;
-  padding: 20px;
-}
-.footer-category {
-  text-align: center;
-}
-.footer-category h3 {
-  margin-bottom: 10px;
-}
-.footer ul {
-  list-style-type: none;
-  padding: 0;
-}
-.footer li {
-  margin-bottom: 5px;
-  cursor: pointer;
-  color: #333;
-}
+
 .create-account-form {
   padding: 20px;
   border-radius: 8px; 
@@ -70,42 +50,56 @@ body {
   max-width: 500px;
   margin: 0 auto; 
 }
+
 .create-account-form label {
   margin-bottom: 8px;
 }
+
 .create-account-form input {
   width: 100%; 
   box-sizing: border-box;
   padding: 8px;
   margin-bottom: 16px;
 }
+
 .create-account-form p {
   margin-top: -8px; 
 }
+
 .credit-card-info {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
 }
+
 .credit-card-info h2 {
   font-size: 1.2em;
   margin-bottom: 10px;
 }
+
 .credit-card-info label {
   width: 100%; 
 }
+
 .credit-card-info input {
   width: calc(50% - 8px);
   margin-right: 16px; 
 }
+
 .credit-card-info input.cvv,
 .credit-card-info input.expiration {
   width: calc(25% - 8px); 
   margin-right: 16px;
 }
+
 .credit-card-info input:last-child {
   margin-right: 0; 
 }
+
+.credit-card-info input:last-child {
+  margin-right: 0; 
+}
+
 button {
   background-color: #7c0808;
   color: white;

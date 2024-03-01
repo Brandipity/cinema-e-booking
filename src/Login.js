@@ -31,7 +31,7 @@ function Login() {
             <label htmlFor="password">Password:</label>
             <input type="password" id="password" name="password" />
 
-            <button type="submit">Login</button>
+            <button type="submit"><Link to="/registereduser">Login</Link></button>
           </form>
           <p><button>Forgot Password</button></p>
         </div>

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Login from './Login';
 import GuestPage from './GuestPage';
 import CreateAccount from './CreateAccount';
+import RegisteredUser from './RegisteredUser';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/guest" element={<GuestPage />} />
         <Route path="/createaccount" element={<CreateAccount />} />
+        <Route path="/registereduser" element={<RegisteredUser />} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>
