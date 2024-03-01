@@ -1,6 +1,5 @@
-//CreateAccount.js
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './CreateAccount.css';
 
 function CreateAccount() {
@@ -15,12 +14,15 @@ function CreateAccount() {
   const [cardNumber, setCardNumber] = useState('');
   const [cardCVV, setCardCVV] = useState('');
   const [cardExpiration, setCardExpiration] = useState('');
+  const navigate = useNavigate();
 
-  // Your login form logic, e.g., handling user input, authentication, etc.
-  const handleLogin = (e) => {
+  const handleCreateAccount = (e) => {
     e.preventDefault();
-    // Add your login logic here
-    console.log('Login logic goes here');
+    // Add your create account logic here
+    console.log('Create account logic goes here');
+
+    // Redirect the user after successful account creation
+    navigate('/registereduser');
   };
 
   return (
@@ -112,31 +114,28 @@ function CreateAccount() {
             </div>
 
             <div className="credit-card-input">
-            <label>CVV:</label>
-            <input
-              type="password"
-              className="cvv" 
-              value={cardCVV}
-              onChange={(e) => setCardCVV(e.target.value)}
-            />
-
-            <label>Expiration Date:</label>
-            <input
-              type="text"
-              className="expiration" 
-              value={cardExpiration}
-              onChange={(e) => setCardExpiration(e.target.value)}
-            />
-            {/* Register Button */}
-            <div className="register-button">
-              <form onSubmit={handleLogin}>
-                <button type="submit"><Link to="/registereduser">Login</Link></button>
-              </form>
+              <label>CVV:</label>
+              <input
+                type="password"
+                value={cardCVV}
+                onChange={(e) => setCardCVV(e.target.value)}
+              />
             </div>
-            
-            
+
+            <div className="credit-card-input">
+              <label>Expiration Date:</label>
+              <input
+                type="text"
+                value={cardExpiration}
+                onChange={(e) => setCardExpiration(e.target.value)}
+              />
             </div>
           </div>
+        </div>
+
+        {/* Register Button */}
+        <div className="register-button">
+          <button type="submit" onClick={handleCreateAccount}>Create Account</button>
         </div>
       </div>
     </div>
