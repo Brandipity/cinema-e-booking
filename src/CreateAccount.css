@@ -11,6 +11,7 @@ body {
   background-color: #7c0808;
   color: white;
   padding: 10px;
+  padding-right: 15;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,9 +25,7 @@ body {
 .navbar-left span {
   font-size: 1.5em;
 }
-.navbar-center input {
-  padding: 8px;
-}
+
 .navbar-right a,
 .navbar-right button {
   color: white;
@@ -116,4 +115,11 @@ body {
 
 .credit-card-info input:last-child {
   margin-right: 0; 
+}
+
+button {
+  background-color: #7c0808;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
 }

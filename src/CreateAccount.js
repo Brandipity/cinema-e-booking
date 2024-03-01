@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './CreateAccount.css';
+import { Link } from 'react-router-dom';
 
 function CreateAccount() {
   const [username, setUsername] = useState('');
@@ -14,12 +15,23 @@ function CreateAccount() {
   const [cardCVV, setCardCVV] = useState('');
   const [cardExpiration, setCardExpiration] = useState('');
 
+  // Your login form logic, e.g., handling user input, authentication, etc.
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Add your login logic here
+    console.log('Login logic goes here');
+  };
+
   return (
     <div className="App">
       {/* Navbar */}
       <nav className="navbar">
         <div className="navbar-left">
           <span>E-CINEMA</span>
+        </div>
+        <div className="navbar-right">
+          <a href="/guest">Continue as Guest</a>
+          <a href="/login">Login</a>
         </div>
       </nav>
 
@@ -100,20 +112,28 @@ function CreateAccount() {
 
             <div className="credit-card-input">
             <label>CVV:</label>
-<input
-  type="password"
-  className="cvv" 
-  value={cardCVV}
-  onChange={(e) => setCardCVV(e.target.value)}
-/>
+            <input
+              type="password"
+              className="cvv" 
+              value={cardCVV}
+              onChange={(e) => setCardCVV(e.target.value)}
+            />
 
-<label>Expiration Date:</label>
-<input
-  type="text"
-  className="expiration" 
-  value={cardExpiration}
-  onChange={(e) => setCardExpiration(e.target.value)}
-/>
+            <label>Expiration Date:</label>
+            <input
+              type="text"
+              className="expiration" 
+              value={cardExpiration}
+              onChange={(e) => setCardExpiration(e.target.value)}
+            />
+            {/* Register Button */}
+            <div className="register-button">
+              <form onSubmit={handleLogin}>
+                <button type="submit"><Link to="/registereduser">Login</Link></button>
+              </form>
+            </div>
+            
+            
             </div>
           </div>
         </div>
