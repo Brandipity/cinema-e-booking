@@ -43,7 +43,6 @@ body {
   padding: 30px;
 }
 
-
 .create-account-form {
   padding: 20px;
   border-radius: 8px; 
@@ -91,6 +90,10 @@ body {
 .credit-card-info input.expiration {
   width: calc(25% - 8px); 
   margin-right: 16px;
+}
+
+.credit-card-info input:last-child {
+  margin-right: 0; 
 }
 
 .credit-card-info input:last-child {
