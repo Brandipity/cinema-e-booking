@@ -1,5 +1,6 @@
 import React from 'react';
 import './Cart.css';
+import { Link } from 'react-router-dom';
 
 function Cart({ cartItems }) {
   return (
@@ -19,7 +20,9 @@ function Cart({ cartItems }) {
       </nav>
       {/* Main content */}
       <div className="main-content">
-        <h2>Shopping Cart</h2>
+        <h2>Cart</h2>
+        {/* Someone PLEASE fix this css */}
+        <Link to="/ordersummary">Order Summary</Link>
         {cartItems && cartItems.length === 0 ? (
           <p>Your cart is empty.</p>
         ) : (
