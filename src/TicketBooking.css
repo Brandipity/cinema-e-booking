@@ -1,12 +1,43 @@
+
 .ticket-booking {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   color: white;
 }
 
 .content-area {
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   padding: 20px;
+}
+
+.footer {
+  display: flex;
+  color: #333;
+  justify-content: space-around;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+.footer-category {
+  text-align: center;
+}
+
+.footer-category h3 {
+  margin-bottom: 10px;
+}
+
+.footer ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer li {
+  margin-bottom: 5px;
+  cursor: pointer;
 }
 
 .movie-details {

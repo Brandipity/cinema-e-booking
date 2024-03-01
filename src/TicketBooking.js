@@ -1,4 +1,7 @@
 // TicketBooking.js
+
+// this file uses some JSX formatting, just trying it out
+
 import React from 'react';
 import {Navigate, useLocation} from 'react-router-dom';
 import './TicketBooking.css';
@@ -51,10 +54,39 @@ function TicketBooking() {
                         <option value="4">20:00</option>
                         <option value="5">22:00</option>
                     </select>
+                    {/* we do a little testing */}
                     <button onClick={() => console.log("Add Showtime Clicked")}>Add Showtime</button>
+
                 </div>
             </div>
+
+            <footer className="footer">
+                <div className="footer-category">
+                    <h3>Account</h3>
+                    <ul>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/createaccount">Create Account</a></li>
+                    </ul>
+                </div>
+
+                <div className="footer-category">
+                    <h3>View Bookings</h3>
+                    <ul>
+                        <li>View Theaters</li>
+                        <li>Promotions & Deals</li>
+                    </ul>
+                </div>
+
+                <div className="footer-category">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>Email</li>
+                        <li>Creators</li>
+                    </ul>
+                </div>
+            </footer>
         </div>
+
     );
 }
 
