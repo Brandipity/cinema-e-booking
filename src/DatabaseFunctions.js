@@ -15,7 +15,7 @@ class DatabaseOperations {
 
     constructor(databaseInstance) {
         this.connection = mysql.createPool({
-            host: 'localhost:3306',
+            host: 'host: localhost', port: 3306,
             user: 'abcs',
             password: 'SectionA!',
             database: 'cinema_e_booking',
