@@ -42,27 +42,7 @@ body {
   color: #f0f0f0;
   padding: 30px;
 }
-.footer {
-  display: flex;
-  justify-content: space-around;
-  background-color: #f0f0f0;
-  padding: 20px;
-}
-.footer-category {
-  text-align: center;
-}
-.footer-category h3 {
-  margin-bottom: 10px;
-}
-.footer ul {
-  list-style-type: none;
-  padding: 0;
-}
-.footer li {
-  margin-bottom: 5px;
-  cursor: pointer;
-  color: #333;
-}
+
 
 .create-account-form {
   padding: 20px;

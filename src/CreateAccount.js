@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './CreateAccount.css';
 import { Link } from 'react-router-dom';
+import './CreateAccount.css';
 
 function CreateAccount() {
   const [username, setUsername] = useState('');
