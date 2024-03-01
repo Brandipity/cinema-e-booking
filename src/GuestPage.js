@@ -18,7 +18,7 @@ function GuestPage() {
           <a href="#">Home</a>
           <a href="#">Showings</a>
           <a href="/login">Login</a>
-          <button>Cart</button>
+          <a href="/cart">Cart</a>
         </div>
       </nav>
 
