@@ -1,0 +1,41 @@
+.ticket-booking {
+  color: white;
+}
+
+.content-area {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.movie-details {
+  display: flex;
+  margin-right: 20px;
+}
+
+.movie-details img {
+  margin-right: 20px;
+}
+
+.showtime-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.showtime-label {
+  margin-bottom: 10px;
+}
+
+button, select {
+  background-color: #7c0808;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+select {
+  display: block;
+}

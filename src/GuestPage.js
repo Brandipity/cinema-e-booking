@@ -17,7 +17,7 @@ function GuestPage() {
 
         API.fetchComingSoonMovies()
             .then(data => setComingSoonMovies(data.results || []))
-            .catch(err => console.error("Failed to fetch coming soon movies:", err));
+            .catch(err => console.error("Failed to fetch upcoming movies:", err));
     }, []);
 
     return (
@@ -39,7 +39,7 @@ function GuestPage() {
             </nav>
 
             <div className="main-content">
-                {/* Currently Playing Movies Section */}
+
                 <div className="main-section">
                     <h2>Currently Running</h2>
                     <div className="movie-list" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
@@ -47,7 +47,6 @@ function GuestPage() {
                     </div>
                 </div>
 
-                {/* Coming Soon Movies Section */}
                 <div className="main-section">
                     <h2>Coming Soon</h2>
                     <div className="movie-list" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>

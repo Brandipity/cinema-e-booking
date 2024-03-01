@@ -12,6 +12,7 @@ import ManageMovies from './ManageMovies';
 import Cart from './Cart'
 import OrderSummary from './OrderSummary';
 import CheckOut from './CheckOut';
+import TicketBooking from "./TicketBooking";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/guest" element={<GuestPage />} />
         <Route path="/createaccount" element={<CreateAccount />} />
+        <Route path="/ticketbooking" element={<TicketBooking />} />
         <Route path="/registereduser" element={<RegisteredUser />} />
         <Route path="/manageaccount" element={<ManageAccount />} />
         <Route path="/orderconfirmation" element={<OrderConfirmation />} />
