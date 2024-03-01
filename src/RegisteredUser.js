@@ -18,7 +18,7 @@ function RegisteredUser() {
         <div className="navbar-right">
           <a href="/registereduser">Home</a>
           <a href="#">Showings</a>
-          <button>Cart</button>
+          <a href="/cart">Cart</a>
         </div>
       </nav>
 
