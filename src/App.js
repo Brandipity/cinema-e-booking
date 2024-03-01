@@ -4,6 +4,7 @@ import Login from './Login';
 import GuestPage from './GuestPage';
 import CreateAccount from './CreateAccount';
 import RegisteredUser from './RegisteredUser';
+import ManageAccount from './ManageAccount';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/guest" element={<GuestPage />} />
         <Route path="/createaccount" element={<CreateAccount />} />
         <Route path="/registereduser" element={<RegisteredUser />} />
+        <Route path="/manageaccount" element={<ManageAccount />} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>
