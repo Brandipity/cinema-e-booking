@@ -30,10 +30,6 @@ body {
     font-size: 1.5em;
   }
   
-  .navbar-center input {
-    padding: 8px;
-  }
-  
   .navbar-right a,
   .navbar-right button {
     color: white;
@@ -53,30 +49,10 @@ body {
     padding: 30px;
   }
   
-  .footer {
-    display: flex;
-    justify-content: space-around;
-    background-color: #f0f0f0;
-    padding: 20px;
-  }
-  
-  .footer-category {
-    text-align: center;
-  }
-  
-  .footer-category h3 {
-    margin-bottom: 10px;
-  }
-  
-  .footer ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .footer li {
-    margin-bottom: 5px;
+  button {
+    background-color: #7c0808;
+    color: white;
+    padding: 10px;
     cursor: pointer;
-    color: #333;
   }
-  
   
