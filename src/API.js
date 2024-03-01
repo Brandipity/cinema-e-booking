@@ -26,6 +26,15 @@ class API {
             .catch(err => console.error(err));
     }
 
+    // Grabs the 'Upcoming' collection (or at least the first page of it, which can be adjusted)
+    // Documentation: https://developer.themoviedb.org/reference/movie-upcoming-list
+    static fetchComingSoonMovies() {
+        return fetch(`${API_URL}/movie/upcoming?language=en-US&page=2`, options)
+            .then(response => response.json())
+            .then(data => data)
+            .catch(err => console.error(err));
+    }
+
     // Grabs details on a specific movie by ID
     // Documentation: https://developer.themoviedb.org/reference/movie-details
     static fetchMovieDetails(movieId) {
