@@ -5,6 +5,7 @@ import GuestPage from './GuestPage';
 import CreateAccount from './CreateAccount';
 import RegisteredUser from './RegisteredUser';
 import ManageAccount from './ManageAccount';
+import OrderConfirmation from './OrderConfirmation';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/createaccount" element={<CreateAccount />} />
         <Route path="/registereduser" element={<RegisteredUser />} />
         <Route path="/manageaccount" element={<ManageAccount />} />
+        <Route path="/orderconfirmation" element={<OrderConfirmation />} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>
