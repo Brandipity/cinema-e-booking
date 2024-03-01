@@ -56,9 +56,32 @@ function GuestPage() {
                 </div>
             </div>
 
-            <footer className="footer">
-                {/* no footer...yet*/}
-            </footer>
+            {/* Footer */}
+      <footer className="footer">
+        <div className="footer-category">
+          <h3>Account</h3>
+          <ul>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/createaccount">Create Account</a></li>
+          </ul>
+        </div>
+
+        <div className="footer-category">
+          <h3>View Bookings</h3>
+          <ul>
+            <li>View Theaters</li>
+            <li>Promotions & Deals</li>
+          </ul>
+        </div>
+
+        <div className="footer-category">
+          <h3>Contact</h3>
+          <ul>
+            <li>Email</li>
+            <li>Creators</li>
+          </ul>
+        </div>
+      </footer>
         </div>
     );
 }
