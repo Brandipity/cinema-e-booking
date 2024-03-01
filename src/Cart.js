@@ -14,7 +14,7 @@ function Cart({ cartItems }) {
           <input type="text" placeholder="Search" />
         </div>
         <div className="navbar-right">
-          <a href="/registereduser">Home</a>
+          <a href="/guest">Home</a>
           <a href="#">Showings</a>
           <a href="/ordersummary">Order Summary</a>
         </div>
