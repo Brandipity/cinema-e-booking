@@ -6,6 +6,9 @@ import CreateAccount from './CreateAccount';
 import RegisteredUser from './RegisteredUser';
 import ManageAccount from './ManageAccount';
 import OrderConfirmation from './OrderConfirmation';
+import Admin from './Admin';
+import ManagePromotions from './ManagePromotions';
+import ManageMovies from './ManageMovies';
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
         <Route path="/registereduser" element={<RegisteredUser />} />
         <Route path="/manageaccount" element={<ManageAccount />} />
         <Route path="/orderconfirmation" element={<OrderConfirmation />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/managepromotions" element={<ManagePromotions />} />
+        <Route path="/managemovies" element={<ManageMovies />} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>
