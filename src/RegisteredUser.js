@@ -40,6 +40,7 @@ function RegisteredUser() {
         <div className="footer-category">
           <h3>Account</h3>
           <ul>
+            <li><a href="/guest">Log Out</a></li>
             <li><a href="/ManageAccount">Manage Account</a></li>
           </ul>
         </div>
