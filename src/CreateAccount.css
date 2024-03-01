@@ -53,6 +53,7 @@ body {
 
 .create-account-form label {
   margin-bottom: 8px;
+  color: #f0f0f0;
 }
 
 .create-account-form input {
@@ -64,9 +65,11 @@ body {
 
 .create-account-form p {
   margin-top: -8px; 
+  color: #f0f0f0;
 }
 
 .credit-card-info {
+  color: #f0f0f0;
   display: flex;
   flex-direction: column;
   margin-top: 20px;

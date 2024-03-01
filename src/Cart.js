@@ -14,15 +14,15 @@ function Cart({ cartItems }) {
           <input type="text" placeholder="Search" />
         </div>
         <div className="navbar-right">
-          <a href="/registereduser">Home</a>
+          <a href="/guest">Home</a>
           <a href="#">Showings</a>
+          <a href="/ordersummary">Order Summary</a>
         </div>
       </nav>
       {/* Main content */}
       <div className="main-content">
         <h2>Cart</h2>
         {/* Someone PLEASE fix this css */}
-        <Link to="/ordersummary">Order Summary</Link>
         {cartItems && cartItems.length === 0 ? (
           <p>Your cart is empty.</p>
         ) : (
