@@ -9,6 +9,9 @@ import OrderConfirmation from './OrderConfirmation';
 import Admin from './Admin';
 import ManagePromotions from './ManagePromotions';
 import ManageMovies from './ManageMovies';
+import Cart from './Cart'
+import OrderSummary from './OrderSummary';
+import CheckOut from './CheckOut';
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/managepromotions" element={<ManagePromotions />} />
         <Route path="/managemovies" element={<ManageMovies />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/ordersummary" element={<OrderSummary />} />
+        <Route path="/checkout" element={<CheckOut />} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>
