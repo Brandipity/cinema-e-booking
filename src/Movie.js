@@ -6,8 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function Movie({ movie }) {
     const navigate = useNavigate();
 
-
-    // placeholder
+    // passes the state to TicketBooking
     const handleMovieClick = () => {
         navigate('/ticketbooking', { state: { movie } });
     };
