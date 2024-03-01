@@ -34,7 +34,6 @@ function RegisteredUser() {
           <div className="navbar-right">
             <a href="#">Home</a>
             <a href="#">Showings</a>
-            <a href="/login">Login</a>
             <a href="/cart">Cart</a>
           </div>
         </nav>
@@ -61,8 +60,8 @@ function RegisteredUser() {
           <div className="footer-category">
             <h3>Account</h3>
             <ul>
-              <li><a href="/login">Login</a></li>
-              <li><a href="/createaccount">Create Account</a></li>
+              <li><a href="/login">Log Out</a></li>
+              <li><a href="/manageaccount">Manage Account</a></li>
             </ul>
           </div>
 
