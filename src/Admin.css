@@ -1,0 +1,54 @@
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .App {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .navbar {
+    background-color: #7c0808;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-left,
+  .navbar-center,
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-left span {
+    font-size: 1.5em;
+  }
+  
+  .navbar-center input {
+    padding: 8px;
+  }
+  
+  .navbar-right a,
+  .navbar-right button {
+    color: white;
+    margin-left: 10px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .navbar-right button {
+    background-color: #333;
+    border: none;
+    padding: 8px 15px;
+  }
+  
+  .main-content {
+    color: white;
+    padding: 30px;
+  }
