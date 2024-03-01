@@ -56,11 +56,11 @@ body {
 
   .order {
     margin-right: 80;
-    color: black
+    color: white
   }
 
   .cart-items, .payment-form {
-    color: black;
+    color: white;
     margin-left: 10%;
     margin-right: 10%;
   }

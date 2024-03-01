@@ -16,7 +16,7 @@ function OrderConfirmation() {
           <span>E-CINEMA</span>
         </div>
       </nav>
-
+    
       
     </div>
   );
