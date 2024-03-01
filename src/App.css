@@ -3,9 +3,9 @@ body {
   margin: 0;
   font-family: 'Arial', sans-serif;
   background-image: url('./loginbackground.png');
-  background-size: cover;
+  background-size: auto;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   height: 100vh;
 }
 
