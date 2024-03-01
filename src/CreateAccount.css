@@ -106,3 +106,8 @@ button {
   padding: 10px;
   cursor: pointer;
 }
+
+.register-button {
+  margin: auto;
+  width: 50%;
+}
