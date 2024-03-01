@@ -49,7 +49,7 @@ body {
   }
   
   .main-content {
-    color: white;
+    color: #f0f0f0;
     padding: 30px;
     margin-bottom: 70%;
   }
@@ -60,7 +60,7 @@ body {
   }
 
   .cart-items, .payment-form {
-    color: white;
+    color: #f0f0f0;
     margin-left: 10%;
     margin-right: 10%;
   }

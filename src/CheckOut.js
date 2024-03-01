@@ -1,4 +1,5 @@
 import React from 'react';
+import './CheckOut.css';
 
 function CheckOut() {
   const handleConfirm = () => {
@@ -16,7 +17,7 @@ function CheckOut() {
           <h2>Checkout</h2>
           <div className="navbar-right">
           <a href="/registereduser">Home</a>
-          <a href="#">Showings</a>
+          <a href="/registereduser">Showings</a>
           <a href="/cart">Cart</a>
           </div>
       </div><div className="App">

@@ -27,7 +27,6 @@ function OrderSummary({ onUpdateCartItem, onDeleteCartItem, onConfirmOrder }) {
     <div className="navbar">
       <h2>Order Summary</h2>
       </div>
-
       <div className="cart-items">
         <h3>Cart Items</h3>
         <p>Your cart is empty.</p>
