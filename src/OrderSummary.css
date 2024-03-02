@@ -45,11 +45,11 @@ body {
   .navbar-right button {
     background-color: #333;
     border: none;
-    padding: 8px 15px;
+    padding: 8px 20px;
   }
   
   .main-content {
-    color: #f0f0f0;
+    color: white;
     padding: 30px;
     margin-bottom: 70%;
   }
@@ -60,8 +60,8 @@ body {
   }
 
   .cart-items, .payment-form {
-    color: #f0f0f0;
+    color: white;
     margin-left: 10%;
     margin-right: 10%;
   }
-
+  
