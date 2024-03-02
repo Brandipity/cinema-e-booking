@@ -25,7 +25,9 @@ function OrderSummary({ onUpdateCartItem, onDeleteCartItem, onConfirmOrder }) {
   return (
     <div>
     <div className="navbar">
-      <h2>Order Summary</h2>
+    <div className="navbar-left">
+          <span>E-CINEMA SUMMARY</span>
+        </div>
       </div>
       <div className="cart-items">
         <h3>Cart Items</h3>
@@ -34,17 +36,8 @@ function OrderSummary({ onUpdateCartItem, onDeleteCartItem, onConfirmOrder }) {
       </div>
       <div className="payment-form">
         <h3>Payment Information</h3>
-        <form onSubmit={handleConfirmOrder}>
-          <label htmlFor="creditCard">Credit Card Number:</label>
-          <input type="text" id="creditCard" value={creditCard} onChange={(e) => setCreditCard(e.target.value)} required />
-
-          <label htmlFor="expiryDate">Expiry Date:</label>
-          <input type="text" id="expiryDate" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} required />
-
-          <label htmlFor="cvv">CVV:</label>
-          <input type="text" id="cvv" value={cvv} onChange={(e) => setCvv(e.target.value)} required />
-
-          <button type="submit"><a href="/checkout">Continue to Checkout</a></button>
+        <form >
+          <button type="submit"><a href="/orderconfirmation">Confirm</a></button>
         </form>
       <Link to="/cart">Back to Cart</Link>
       </div>

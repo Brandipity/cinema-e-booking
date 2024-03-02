@@ -13,7 +13,7 @@ function OrderConfirmation() {
       {/* Navbar */}
       <nav className="navbar">
         <div className="navbar-left">
-          <span>E-CINEMA</span>
+          <span>E-CINEMA CONFIRMATION</span>
         </div>
       </nav>
     
