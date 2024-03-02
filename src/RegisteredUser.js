@@ -34,6 +34,7 @@ function RegisteredUser() {
           <div className="navbar-right">
             <a href="#">Home</a>
             <a href="#">Showings</a>
+            <a href="/login">Log Out</a>
             <a href="/cart">Cart</a>
           </div>
         </nav>
