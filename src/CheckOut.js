@@ -1,5 +1,6 @@
 import React from 'react';
 import './CheckOut.css';
+import { Link } from 'react-router-dom';
 
 function CheckOut() {
   const handleConfirm = () => {
@@ -27,7 +28,7 @@ function CheckOut() {
 
               <div className="main-content">
                   <button onClick={handleConfirm}>Confirm</button>
-                  <button onClick={handleCancel}>Cancel</button>
+                  <button onClick={handleCancel}><Link to="/ordersummary">Cancel</Link></button>
               </div>
           </div></>
   );
