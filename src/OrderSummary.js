@@ -25,7 +25,7 @@ function OrderSummary({ onUpdateCartItem, onDeleteCartItem, onConfirmOrder }) {
   return (
     <div>
     <div className="navbar">
-    <div className="navbar-left">
+      <div className="navbar-left">
           <span>E-CINEMA SUMMARY</span>
         </div>
       </div>
@@ -36,6 +36,7 @@ function OrderSummary({ onUpdateCartItem, onDeleteCartItem, onConfirmOrder }) {
       </div>
       <div className="payment-form">
         <h3>Payment Information</h3>
+        <p>Billed To: [card number]</p>
         <form >
           <button type="submit"><a href="/orderconfirmation">Confirm</a></button>
         </form>

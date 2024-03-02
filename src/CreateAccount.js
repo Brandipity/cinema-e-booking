@@ -92,7 +92,7 @@ function CreateAccount() {
 
         {/* Credit Card Info */}
         <div className="credit-card-info">
-          <h2>Credit Card Info</h2>
+          <h2>Credit Card Information (Optional)</h2>
           
           <div className="credit-card-inputs">
             <div className="credit-card-input">
