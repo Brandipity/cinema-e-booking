@@ -11,7 +11,6 @@ import ManagePromotions from './ManagePromotions';
 import ManageMovies from './ManageMovies';
 import Cart from './Cart'
 import OrderSummary from './OrderSummary';
-import CheckOut from './CheckOut';
 import TicketBooking from "./TicketBooking";
 
 function App() {
@@ -31,7 +30,6 @@ function App() {
         <Route path="/managemovies" element={<ManageMovies />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/ordersummary" element={<OrderSummary />} />
-        <Route path="/checkout" element={<CheckOut />} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>

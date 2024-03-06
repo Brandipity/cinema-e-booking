@@ -31,7 +31,7 @@ function GuestPage() {
                     <input type="text" placeholder="Search" />
                 </div>
                 <div className="navbar-right">
-                    <a href="#">Home</a>
+                    <a href="/guest">Home</a>
                     <a href="#">Showings</a>
                     <a href="/login">Login</a>
                     <a href="/cart">Cart</a>
