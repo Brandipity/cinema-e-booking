@@ -1,25 +1,41 @@
+
 // RegisteredUser.js
 
-import React, {useEffect, useState} from 'react';
-import './RegisteredUser.css';
-import API from "./API";
-import Movie from "./Movie";
-
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Movie from './Movie';
+import './GuestPage.css';
 
 function RegisteredUser() {
   const [currentMovies, setCurrentMovies] = useState([]);
-  const [comingSoonMovies, setComingSoonMovies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate(); // Use useNavigate hook for navigation
 
   useEffect(() => {
-
-    API.fetchMovies()
-        .then(data => setCurrentMovies(data.results || []))
+    fetch('http://localhost:3001/api/movies/now-playing')
+        .then(response => response.json())
+        .then(data => setCurrentMovies(data || []))
         .catch(err => console.error("Failed to fetch current movies:", err));
-
-    API.fetchComingSoonMovies()
-        .then(data => setComingSoonMovies(data.results || []))
-        .catch(err => console.error("Failed to fetch upcoming movies:", err));
   }, []);
+
+  const handleSearchChange = (event) => {
+    const { value } = event.target;
+    setSearchTerm(value);
+    if (value.trim()) {
+      // filter based on search
+      const filteredResults = currentMovies.filter(movie =>
+          movie.title.toLowerCase().includes(value.toLowerCase())
+      );
+      setSearchResults(filteredResults);
+    } else {
+      setSearchResults([]);
+    }
+  };
+
+  const handleMovieClick = (movie) => {
+    navigate('/ticketbooking', { state: { movie } });
+  };
 
   return (
       <div className="App">
@@ -29,7 +45,12 @@ function RegisteredUser() {
             <span>E-CINEMA</span>
           </div>
           <div className="navbar-center">
-            <input type="text" placeholder="Search" />
+            <input
+                type="text"
+                placeholder="Search"
+                value={searchTerm}
+                onChange={handleSearchChange}
+            />
           </div>
           <div className="navbar-right">
             <a href="#">Home</a>
@@ -40,22 +61,20 @@ function RegisteredUser() {
         </nav>
 
         <div className="main-content">
-
           <div className="main-section">
             <h2>Currently Running</h2>
             <div className="movie-list" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-              {currentMovies.map(movie => <Movie key={movie.id} movie={movie} />)}
-            </div>
-          </div>
-
-          <div className="main-section">
-            <h2>Coming Soon</h2>
-            <div className="movie-list" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-              {comingSoonMovies.map(movie => <Movie key={movie.id} movie={movie} />)}
+              {searchTerm.trim() ?
+                  searchResults.map(movie => (
+                      <Movie key={movie.id} movie={movie} onClick={() => handleMovieClick(movie)} />
+                  )) :
+                  currentMovies.map(movie => (
+                      <Movie key={movie.id} movie={movie} onClick={() => handleMovieClick(movie)} />
+                  ))
+              }
             </div>
           </div>
         </div>
-
         {/* Footer */}
         <footer className="footer">
           <div className="footer-category">
@@ -87,3 +106,4 @@ function RegisteredUser() {
 }
 
 export default RegisteredUser;
+
