@@ -135,7 +135,7 @@ function CreateAccount() {
 
         {/* Register Button */}
         <div className="register-button">
-          <button type="submit" onClick={handleCreateAccount}>Create Account</button>
+          <button><Link to="/createacctconfirm">Create Account</Link></button>
         </div>
       </div>
     </div>

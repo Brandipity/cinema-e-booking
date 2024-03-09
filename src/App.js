@@ -12,6 +12,7 @@ import ManageMovies from './ManageMovies';
 import Cart from './Cart'
 import OrderSummary from './OrderSummary';
 import TicketBooking from "./TicketBooking";
+import CreateAcctConfirm from "./CreateAcctConfirm";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/managemovies" element={<ManageMovies />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/ordersummary" element={<OrderSummary />} />
+        <Route path="/createacctconfirm" element={<CreateAcctConfirm />} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>
