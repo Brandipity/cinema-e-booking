@@ -48,6 +48,10 @@ body {
     color: #f0f0f0;
     padding: 30px;
   }
+
+  .credit-card-info, .credit-card-info label {
+    color: white;
+  }
   
   button {
     background-color: #7c0808;
@@ -55,4 +59,3 @@ body {
     padding: 10px;
     cursor: pointer;
   }
-  

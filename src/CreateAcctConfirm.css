@@ -54,14 +54,12 @@ body {
     margin-bottom: 70%;
   }
 
-  .order {
-    margin-right: 80;
-    color: white
-  }
-
-  .cart-items, .payment-form {
+  .user-info{
     color: white;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin: 10%;
+  }
+  .register-button {
+    margin: auto;
+    width: auto;
   }
   

@@ -14,7 +14,7 @@ function CreateAcctConfirm() {
 //   const [cardNumber, setCardNumber] = useState('');
 //   const [cardCVV, setCardCVV] = useState('');
 //   const [cardExpiration, setCardExpiration] = useState('');
-//   const navigate = useNavigate();
+   const navigate = useNavigate();
 
   const handleCreateAccount = (e) => {
     e.preventDefault();
@@ -32,27 +32,47 @@ function CreateAcctConfirm() {
         <div className="navbar-left">
           <span>E-CINEMA</span>
         </div>
+        <div className="navbar-right">
+          <a href="/login">Login</a>
+        </div>
       </nav>
 
-      {/* Create Account Form */}
-      <div className="create-account-form">
-        <label>Username:</label>
+      {/* User Information*/}
+      <div className="user-info">
+        <div> 
+          <label>Username:</label>
+        </div>
 
-        <label>Password:</label>
-        <label>First Name:</label>
+        <div> 
+          <label>Password:</label>
+        </div>
 
-        <label>Last Name:</label>
+        <div>
+          <label>First Name:</label>
+        </div>
 
-        <label>Phone Number:</label>
+        <div>
+          <label>Last Name:</label>
+        </div>
 
-        <label>Email:</label>
+        <div> 
+          <label>Phone Number:</label>
+        </div>
 
-        <label>Mailing Address:</label>
+        <div> 
+         <label>Email:</label>
+        </div>
+        
+        <div> 
+          <label>Mailing Address:</label>
+        </div>
 
         {/* Credit Card Info */}
         <div className="credit-card-info">
-          <h2>Credit Card Information (Optional)</h2>
-          
+          <h3>Credit Card Information</h3>
+          <div> 
+            <p>No information Available</p>
+          </div>
         </div>
 
         {/* Register Button */}
