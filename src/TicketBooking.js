@@ -6,6 +6,8 @@ import React from 'react';
 import {Navigate, useLocation} from 'react-router-dom';
 import './TicketBooking.css';
 
+
+
 function TicketBooking() {
 
     const location = useLocation();
@@ -16,6 +18,8 @@ function TicketBooking() {
     if (!movie) {
         return <Navigate to="/" replace />;
     }
+
+
 
     return (
         <div className="ticket-booking">
@@ -43,7 +47,9 @@ function TicketBooking() {
                         <p>{movie.overview}</p>
                     </div>
                 </div>
+            </div>
 
+            <div className="dropdowns">
                 <div className="showtime-area">
                     {/* dropdown */}
                     <label htmlFor="showtimes" className="showtime-label">Choose a showtime:</label>
@@ -57,8 +63,50 @@ function TicketBooking() {
                     {/* we do a little testing */}
                     <button onClick={() => console.log("Add Showtime Clicked")}>Add Showtime</button>
 
+                    {/* dropdown */}
+                    <label>Ticket Age:</label>
+                    <select id="Age" name="Age">
+                        <option value="1">Child</option>
+                        <option value="2">Adult</option>
+                        <option value="3">Senior</option>
+                    </select>
+                    {/* we do a little testing */}
+                    <button onClick={() => console.log("Ticket Age slected")}>Select Age</button>
+                </div>
+
+                    <p>*Row A is closest to the screen.</p>
+                    <p>*Seats numbers increment from right to left.</p>
+
+                <div className="seat">
+                    
+                    {/* dropdown */}
+                    <label>Seat Letter:</label>
+                    <select id="Seat" name="Seat">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                    </select>
+                    <label>Seat Number:</label>
+                    <select id="Seat" name="Seat">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                    </select>
+                    <button onClick={() => console.log("Seat selected")}>Select Seat</button>
                 </div>
             </div>
+
 
             <footer className="footer">
                 <div className="footer-category">
