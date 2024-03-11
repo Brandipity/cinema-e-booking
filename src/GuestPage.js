@@ -72,6 +72,7 @@ function GuestPage() {
                                 <Movie key={movie.id} movie={movie} onClick={() => handleMovieClick(movie)} />
                             ))
                         }
+                        <h2>Coming Soon</h2>
                     </div>
                 </div>
             </div>
