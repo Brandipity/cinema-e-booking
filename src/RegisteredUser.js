@@ -72,7 +72,7 @@ function RegisteredUser() {
                       <Movie key={movie.id} movie={movie} onClick={() => handleMovieClick(movie)} />
                   ))
               }
-              <h2>Currently Running</h2>
+              //<h2>Currently Running</h2>
             </div>
           </div>
         </div>
