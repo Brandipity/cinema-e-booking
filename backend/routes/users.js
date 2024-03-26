@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/database');
 const bcrypt = require('bcrypt');
+// Import email sending function
+const sendConfirmationEmail = require('../src/emailSender');
+
 
 // add a new user
 router.post('/', async (request, response) => {
@@ -16,15 +19,24 @@ router.post('/', async (request, response) => {
 
     const sql = `INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)`;
 
-    db.run(sql, [username, email, passwordHash], function(err) {
+    db.run(sql, [username, email, passwordHash], async function(err) {
         if (err) {
             console.error(err.message);
             response.status(500).json({ error: err.message });
             return;
         }
+
+        // Send confirmation email
+        try {
+            await sendConfirmationEmail(email);
+        } catch (error) {
+            console.error('Error sending confirmation email:', error);
+        }
+
         response.json({ message: 'User added successfully', userId: this.lastID });
     });
 });
+
 
 // get user details by userId
 router.get('/:userId', (request, response) => {

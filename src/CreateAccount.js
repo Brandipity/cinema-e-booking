@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './CreateAccount.css';
+//import axios to make HTTP requests 
+import axios from 'axios';
 
 function CreateAccount() {
   const [username, setUsername] = useState('');
@@ -16,13 +18,29 @@ function CreateAccount() {
   const [cardExpiration, setCardExpiration] = useState('');
   const navigate = useNavigate();
 
-  const handleCreateAccount = (e) => {
+  const handleCreateAccount = async (e) => {
     e.preventDefault();
-    // Add your create account logic here
-    console.log('Create account logic goes here');
+    try {
+      // Send user data to backend
+      const response = await axios.post('/api/users', {
+        username,
+        password,
+        firstName,
+        lastName,
+        phoneNumber,
+        email,
+        mailingAddress,
+        cardName,
+        cardNumber,
+        cardCVV,
+        cardExpiration
+      });
 
-    // Redirect the user after successful account creation
-    navigate('/registereduser');
+      // Redirect the user after successful account creation
+      navigate('/registereduser');
+    } catch (error) {
+      console.error('Error creating account:', error);
+    }
   };
 
   return (

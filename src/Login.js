@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
+import axios from 'axios';
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -14,23 +15,22 @@ function Login() {
       setLoading(true);
       setError(""); 
       try {
-          // replace with actual login logic
-          if (username === "username" && password === "password") {
-              // redirects to the authenticated view after successful login
-              setLoading(false);
-              navigate("/registereduser");
-          } else {
-              // displays error message for incorrect credentials
-              setLoading(false);
-              setError("Invalid username or password. Please try again.");
-          }
-      } catch (err) {
-          // Handle errors if any
-          setLoading(false);
-          setError("An error occurred. Please try again later.");
-          console.error("Login error:", err);
-      }
-  }
+        // Send login request to backend
+        const response = await axios.post('/api/login', {
+            username,
+            password
+        });
+
+        // If login is successful, redirect to authenticated view
+        setLoading(false);
+        navigate("/registereduser");
+    } catch (err) {
+        // Handle login error
+        setLoading(false);
+        setError("Invalid username or password. Please try again.");
+        console.error("Login error:", err);
+    }
+}
 
   return (
     <div className="App">
