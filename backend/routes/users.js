@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../db/database');
 const bcrypt = require('bcrypt');
 // Import email sending function
-const sendConfirmationEmail = require('../src/emailSender');
+const sendConfirmationEmail = require('../../src/emailSender');
 
 
 // add a new user
