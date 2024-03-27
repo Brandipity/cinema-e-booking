@@ -8,33 +8,40 @@ const sendConfirmationEmail = require('../../src/emailSender');
 
 // add a new user
 router.post('/', async (request, response) => {
-    const { username, email, password } = request.body;
+    const { username, password, email, firstName, lastName, phoneNumber, cardNumber, expiryDate, cardholderName, securityCode } = request.body;
 
-    if (!username || !email || !password) {
-        return response.status(400).json({ error: 'Missing required fields: username, email, and password are required' });
+    // validate data
+    if (!username || !password || !email) {
+        return response.status(400).json({ error: 'Missing required fields: username, password, and email are required' });
     }
 
-    // hashes the password before storing it in the database (encryption ftw)
-    const passwordHash = await bcrypt.hash(password, 10);
+    try {
+        const passwordHash = await bcrypt.hash(password, 10);
+        db.run(`INSERT INTO users (username, email, password_hash, firstName, lastName, phoneNumber) VALUES (?, ?, ?, ?, ?, ?)`,
+            [username, email, passwordHash, firstName, lastName, phoneNumber],
+            function(err) {
+                if (err) {
+                    console.error(err.message);
+                    response.status(500).json({ error: err.message });
+                    return;
+                }
 
-    const sql = `INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)`;
+                const userId = this.lastID;
 
-    db.run(sql, [username, email, passwordHash], async function(err) {
-        if (err) {
-            console.error(err.message);
-            response.status(500).json({ error: err.message });
-            return;
-        }
-
-        // Send confirmation email
-        try {
-            await sendConfirmationEmail(email);
-        } catch (error) {
-            console.error('Error sending confirmation email:', error);
-        }
-
-        response.json({ message: 'User added successfully', userId: this.lastID });
-    });
+                if (cardNumber && expiryDate && cardholderName && securityCode) {
+                    db.run(`INSERT INTO payment_cards (user_id, card_number, expiry_date, cardholder_name, security_code) VALUES (?, ?, ?, ?, ?)`,
+                        [userId, cardNumber, expiryDate, cardholderName, securityCode], function(err) {
+                            if (err) {
+                                console.error(err.message);
+                            }
+                        });
+                }
+                response.json({ message: 'User added successfully', userId: userId });
+            });
+    } catch (error) {
+        console.error('Error creating user:', error);
+        response.status(500).json({ error: 'Internal server error' });
+    }
 });
 
 

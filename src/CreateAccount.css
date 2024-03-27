@@ -2,16 +2,20 @@ body {
   margin: 0;
   font-family: 'Arial', sans-serif;
 }
+
 .App {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
+.white-text {
+  color: white;
+}
 .navbar {
   background-color: #7c0808;
   color: white;
   padding: 10px;
-  padding-right: 15;
+  padding-right: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;

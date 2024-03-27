@@ -16,30 +16,35 @@ function CreateAccount() {
   const [cardNumber, setCardNumber] = useState('');
   const [cardCVV, setCardCVV] = useState('');
   const [cardExpiration, setCardExpiration] = useState('');
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const navigate = useNavigate();
 
   const handleCreateAccount = async (e) => {
     e.preventDefault();
+    if (!showConfirmation) {
+      setShowConfirmation(true);
+      return;
+    }
     try {
-      // Send user data to backend
-      const response = await axios.post('/api/users', {
+      const userData = {
         username,
         password,
+        email,
         firstName,
         lastName,
         phoneNumber,
-        email,
-        mailingAddress,
-        cardName,
         cardNumber,
-        cardCVV,
-        cardExpiration
-      });
-
-      // Redirect the user after successful account creation
+        expiryDate: cardExpiration,
+        cardholderName: cardName,
+        securityCode: cardCVV,
+      };
+      // Note from Brandon: you HAVE to use the full Express server URL here due to Axios
+      const response = await axios.post('http://localhost:3001/api/users', userData);
+      console.log('Account created:', response.data);
+      // redirects the user after successful account creation
       navigate('/registereduser');
     } catch (error) {
-      console.error('Error creating account:', error);
+      console.error('Error creating account:', error.response?.data?.error || error.message);
     }
   };
 
@@ -55,9 +60,26 @@ function CreateAccount() {
           <a href="/login">Login</a>
         </div>
       </nav>
+      {/* eliminates the need for a separate page (lfg) */}
+      {showConfirmation ? (
+          <div className="confirmation-view white-text">
+            <h2>Confirm Your Information</h2>
+            <p>Username: {username}</p>
+            <p>First Name: {firstName}</p>
+            <p>Last Name: {lastName}</p>
+            <p>Phone Number: {phoneNumber}</p>
+            <p>Email: {email}</p>
+            <p>Mailing Address: {mailingAddress}</p>
+            <p>Card Name: {cardName}</p>
+            <p>Card Number: {cardNumber}</p>
+            <p>Card Expiration: {cardExpiration}</p>
+            <p>Card CVV: {cardCVV}</p>
 
-      {/* Create Account Form */}
-      <div className="create-account-form">
+            <button onClick={handleCreateAccount}>Confirm and Create Account</button>
+            <button onClick={() => setShowConfirmation(false)}>Back to Edit</button>
+          </div>
+      ) : (
+      <form className="create-account-form" onSubmit={handleCreateAccount}>
         <label>Username:</label>
         <input
           type="text"
@@ -153,9 +175,10 @@ function CreateAccount() {
 
         {/* Register Button */}
         <div className="register-button">
-          <button><Link to="/createacctconfirm">Create Account</Link></button>
+          <button type="submit" className="register-button">Create Account</button>
         </div>
-      </div>
+      </form>
+          )}
     </div>
   );
 }
