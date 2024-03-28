@@ -4,6 +4,8 @@ import './CreateAccount.css';
 //import axios to make HTTP requests 
 import axios from 'axios';
 
+import sendConfirmationEmail from './emailSender';
+
 function CreateAccount() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -41,6 +43,9 @@ function CreateAccount() {
       // Note from Brandon: you HAVE to use the full Express server URL here due to Axios
       const response = await axios.post('http://localhost:3001/api/users', userData);
       console.log('Account created:', response.data);
+
+      await sendConfirmationEmail(email, username);
+
       // redirects the user after successful account creation
       navigate('/registereduser');
     } catch (error) {
