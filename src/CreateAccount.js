@@ -147,33 +147,28 @@ function CreateAccount() {
                 value={cardName}
                 onChange={(e) => setCardName(e.target.value)}
               />
-            </div>
 
-            <div className="credit-card-input">
               <label>Card Number:</label>
               <input
                 type="password"
                 value={cardNumber}
                 onChange={(e) => setCardNumber(e.target.value)}
               />
-            </div>
 
-            <div className="credit-card-input">
               <label>CVV:</label>
               <input
                 type="password"
                 value={cardCVV}
                 onChange={(e) => setCardCVV(e.target.value)}
               />
-            </div>
 
-            <div className="credit-card-input">
               <label>Expiration Date:</label>
               <input
                 type="text"
                 value={cardExpiration}
                 onChange={(e) => setCardExpiration(e.target.value)}
               />
+
             </div>
           </div>
         </div>

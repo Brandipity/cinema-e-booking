@@ -9,17 +9,18 @@ body {
   height: 100vh;
 }
 .white-text {
-  color: white;
+  color: #eeeeee;
 }
 .navbar {
-  background-color: #7c0808;
-  color: white;
+  background-color: #990000;
+  color: #eeeeee;
   padding: 10px;
   padding-right: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .navbar-left,
 .navbar-center,
 .navbar-right {
@@ -32,18 +33,23 @@ body {
 
 .navbar-right a,
 .navbar-right button {
-  color: white;
+  color: #eeeeee;
   margin-left: 10px;
   text-decoration: none;
   cursor: pointer;
 }
 .navbar-right button {
-  background-color: #333;
   border: none;
   padding: 8px 15px;
 }
+
+.navbar-right a:hover {
+  text-decoration: underline;
+  color: #eeeeee;
+}
+
 .main-content {
-  color: #f0f0f0;
+  color: #eeeeee;
   padding: 30px;
 }
 
@@ -57,7 +63,7 @@ body {
 
 .create-account-form label {
   margin-bottom: 8px;
-  color: #f0f0f0;
+  color: #eeeeee;
 }
 
 .create-account-form input {
@@ -69,11 +75,11 @@ body {
 
 .create-account-form p {
   margin-top: -8px; 
-  color: #f0f0f0;
+  color: #eeeeee;
 }
 
 .credit-card-info {
-  color: #f0f0f0;
+  color: #eeeeee;
   display: flex;
   flex-direction: column;
   margin-top: 20px;
@@ -84,13 +90,14 @@ body {
   margin-bottom: 10px;
 }
 
-.credit-card-info label {
+.credit-card-input label {
   width: 100%; 
 }
 
-.credit-card-info input {
-  width: calc(50% - 8px);
+.credit-card-input input {
+  display: block;
   margin-right: 16px; 
+  margin-top: 5px;
 }
 
 .credit-card-info input.cvv,
@@ -108,13 +115,31 @@ body {
 }
 
 button {
-  background-color: #7c0808;
-  color: white;
+  background-color: #990000;
+  color: #eeeeee;
   padding: 10px;
   cursor: pointer;
+}
+
+.register-button:hover {
+  text-decoration: underline;
+  color: #eeeeee;
 }
 
 .register-button {
   margin: auto;
   width: 50%;
+}
+
+.confirmation-view button {
+  background-color: #990000;
+  color: #eeeeee;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.confirmation-view button:hover {
+  text-decoration: underline;
+  color: #eeeeee;
 }
