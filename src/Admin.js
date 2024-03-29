@@ -13,8 +13,9 @@ function Admin() {
         <div className="navbar-center">
           <input type="text" placeholder="Search" />
         </div>
-        <div className="navbar-right">
+         <div className="navbar-right">
           <a href="/registereduser"> Home </a>
+          <a href="/login"> Logout </a>
         </div>
       </nav>
 
