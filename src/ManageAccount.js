@@ -1,11 +1,14 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ManageAccount.css';
+import CreateAccount from './CreateAccount';
 
-function ManageAccount() {
+function ManageAccount( { userId }) {
   const [userData, setUserData] = useState({
     username: '',
+    password: '',
     firstName: '',
     lastName: '',
     phoneNumber: '',
@@ -20,17 +23,19 @@ function ManageAccount() {
 
   useEffect(() => {
     fetchUserData();
-  }, []);
+  }, [userId]); 
 
+  //trying to dynamically access a userID is jsut doesn't connect with the database at all
+  //this will display the username of the user in row 1 of the database, you can also change that username
   const fetchUserData = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/api/users/me');
+      const response = await axios.get(`http://localhost:3001/api/users/1`);
       setUserData(response.data);
     } catch (error) {
       console.error('Error fetching user data:', error.response?.data?.error || error.message);
     }
   };
-
+  
   const handleUpdateAccount = async (e) => {
     e.preventDefault();
     if (!showConfirmation) {
@@ -38,7 +43,7 @@ function ManageAccount() {
       return;
     }
     try {
-      const response = await axios.put('http://localhost:3001/api/users/me', userData);
+      const response = await axios.put(`http://localhost:3001/api/users/1`, userData);
       console.log('Account updated:', response.data);
       navigate('/registereduser');
     } catch (error) {
@@ -55,20 +60,25 @@ function ManageAccount() {
   };
 
   return (
+
     <div className="App">
       <nav className="navbar">
         <div className="navbar-left">
           <span>E-CINEMA</span>
         </div>
         <div className="navbar-right">
-          <Link to="/profile">Back to Profile</Link>
+          <Link to="/registereduser">Back to Home</Link>
           <Link to="/logout">Logout</Link>
         </div>
       </nav>
 
-      <form className="manage-account-form" onSubmit={handleUpdateAccount}>
+      <form className="create-account-form" onSubmit={handleUpdateAccount}>
         <label>Username:</label>
         <input type="text" name="username" value={userData.username} onChange={handleChange} />
+
+        <label>Password:</label>
+          <input type="password" name="password" value={userData.password} onChange={handleChange} />
+        <p>Password must contain at least one uppercase letter and one number.</p>
 
         <label>First Name:</label>
         <input type="text" name="firstName" value={userData.firstName} onChange={handleChange} />
