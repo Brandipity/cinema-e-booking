@@ -1,90 +1,116 @@
-// ManageAccount.js
-
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './ManageAccount.css';
 
 function ManageAccount() {
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastName] = useState('');
-  // const [phoneNumber, setPhoneNumber] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [mailingAddress, setMailingAddress] = useState('');
-  // const [cardName, setCardName] = useState('');
-  // const [cardNumber, setCardNumber] = useState('');
-  // const [cardCVV, setCardCVV] = useState('');
-  // const [cardExpiration, setCardExpiration] = useState('');
+  const [userData, setUserData] = useState({
+    username: '',
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    mailingAddress: '',
+    cardName: '',
+    cardNumber: '',
+    cardCVV: '',
+    cardExpiration: ''
+  });
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const navigate = useNavigate();
 
-  // Code in order to save any changes the user makes to their information
-  const saveChanges = (e) => {
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/api/users/me');
+      setUserData(response.data);
+    } catch (error) {
+      console.error('Error fetching user data:', error.response?.data?.error || error.message);
+    }
+  };
+
+  const handleUpdateAccount = async (e) => {
     e.preventDefault();
-    // Change the user's information here
-    console.log('Changes made goes here');
+    if (!showConfirmation) {
+      setShowConfirmation(true);
+      return;
+    }
+    try {
+      const response = await axios.put('http://localhost:3001/api/users/me', userData);
+      console.log('Account updated:', response.data);
+      navigate('/registereduser');
+    } catch (error) {
+      console.error('Error updating account:', error.response?.data?.error || error.message);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData(prevData => ({
+      ...prevData,
+      [name]: value
+    }));
   };
 
   return (
     <div className="App">
-      {/* Navbar */}
       <nav className="navbar">
         <div className="navbar-left">
           <span>E-CINEMA</span>
         </div>
         <div className="navbar-right">
-          <a href="/registereduser">Home</a>
+          <Link to="/profile">Back to Profile</Link>
+          <Link to="/logout">Logout</Link>
         </div>
       </nav>
 
-      {/* User Information*/}
-      <div className="user-info">
-        <div> 
-          <label>Username:</label>
-        </div>
+      <form className="manage-account-form" onSubmit={handleUpdateAccount}>
+        <label>Username:</label>
+        <input type="text" name="username" value={userData.username} onChange={handleChange} />
 
-        <div> 
-          <label>Password:</label>
-        </div>
+        <label>First Name:</label>
+        <input type="text" name="firstName" value={userData.firstName} onChange={handleChange} />
 
-        <div>
-          <label>First Name:</label>
-        </div>
+        <label>Last Name:</label>
+        <input type="text" name="lastName" value={userData.lastName} onChange={handleChange} />
 
-        <div>
-          <label>Last Name:</label>
-        </div>
+        <label>Phone Number:</label>
+        <input type="tel" name="phoneNumber" value={userData.phoneNumber} onChange={handleChange} />
 
-        <div> 
-          <label>Phone Number:</label>
-        </div>
+        <label>Mailing Address:</label>
+        <input type="text" name="mailingAddress" value={userData.mailingAddress} onChange={handleChange} />
 
-        <div> 
-         <label>Email:</label>
-        </div>
-        
-        <div> 
-          <label>Mailing Address:</label>
-        </div>
-
-        {/* Credit Card Info */}
         <div className="credit-card-info">
-          <label>Credit Card 1: </label>
-            <p>No information Available</p>
-          <label>Credit Card 2: </label>
-            <p>No information Available</p>
-          <label>Credit Card 2: </label>
-            <p>No information Available</p>
+          <h2>Credit Card Information (Optional)</h2>
+
+          <label>Name on Card:</label>
+          <input type="text" name="cardName" value={userData.cardName} onChange={handleChange} />
+
+          <label>Card Number:</label>
+          <input type="password" name="cardNumber" value={userData.cardNumber} onChange={handleChange} />
+
+          <label>CVV:</label>
+          <input type="password" name="cardCVV" value={userData.cardCVV} onChange={handleChange} />
+
+          <label>Expiration Date:</label>
+          <input type="text" name="cardExpiration" value={userData.cardExpiration} onChange={handleChange} />
         </div>
 
-      {/* Register Button */}
-      <div className="register-button">
-        <form onSubmit={saveChanges}>
-          <button type="submit"><Link to="/registereduser">Save Changes</Link></button>
-        </form>
-      </div>
-      </div>
+        {showConfirmation && (
+          <div className="confirmation-view">
+            <button type="submit">Confirm and Update Account</button>
+            <button onClick={() => setShowConfirmation(false)}>Back to Edit</button>
+          </div>
+        )}
 
-      
+        {!showConfirmation && (
+          <div className="edit-view">
+            <button type="submit">Update Account</button>
+          </div>
+        )}
+      </form>
     </div>
   );
 }
