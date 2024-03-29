@@ -70,6 +70,13 @@ function AdminLogin() {
           </form>
           <p><button>Forgot Password</button></p>
         </div>
+        <div className="options-section">
+          <h2>Options</h2>
+          <ul>
+            <li><button><Link to="/admincreateaccount">Create Account</Link></button></li>
+            <li><button>Contact</button></li>
+          </ul>
+        </div>
       </div>
     </div>
   );
