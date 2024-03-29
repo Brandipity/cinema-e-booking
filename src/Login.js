@@ -78,7 +78,7 @@ function Login() {
             {/* Use button instead of Link for form submission */}
             <button type="submit"><Link to="/registereduser">Login</Link></button>
           </form>
-          <p><button>Forgot Password</button></p>
+          <button type="submit"><Link to="/forgotpassword">Forgot Password</Link></button>
         </div>
 
         {/* Options Section */}

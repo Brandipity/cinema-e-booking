@@ -120,21 +120,21 @@ body {
   margin-right: 0; 
 }
 
-button {
+/* button {
   background-color: #990000;
   color: #eeeeee;
   padding: 10px;
   cursor: pointer;
-}
+} */
 
 .register-button:hover {
   text-decoration: underline;
   color: #eeeeee;
 }
 
-.register-button {
-  margin: auto;
-  width: 50%;
+.edit-view button {
+  display: block;
+  margin: 0 auto;
 }
 
 .confirmation-view button {
@@ -148,4 +148,16 @@ button {
 .confirmation-view button:hover {
   text-decoration: underline;
   color: #eeeeee;
+}
+
+.promotion-checkbox input[type="checkbox"]{
+  width: 13px;
+  height: 13px;
+  padding: 25px;
+  border: 5px solid black;
+}
+.promotion-checkbox input[type="checkbox"],
+.promotion-checkbox label {
+  display: inline; /* or display: inline; */
+  margin-right: 8px; 
 }

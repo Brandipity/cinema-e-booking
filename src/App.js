@@ -14,6 +14,7 @@ import OrderSummary from './OrderSummary';
 import TicketBooking from "./TicketBooking";
 import AdminLogin from './AdminLogin';
 import AdminCreateAccount from './AdminCreateAccount';
+import ForgotPassword from './ForgotPassword';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/ordersummary" element={<OrderSummary />} />
         <Route path="/adminlogin" element={<AdminLogin />} />
         <Route path="/admincreateaccount" element={<AdminCreateAccount/>} />
+        <Route path="/forgotpassword" element={<ForgotPassword/>} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>
