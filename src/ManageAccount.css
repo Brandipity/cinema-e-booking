@@ -1,61 +1,145 @@
-
 body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .App {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  
-  .navbar {
-    background-color: #7c0808;
-    color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .navbar-left,
-  .navbar-center,
-  .navbar-right {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-left span {
-    font-size: 1.5em;
-  }
-  
-  .navbar-right a,
-  .navbar-right button {
-    color: white;
-    margin-left: 10px;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  .navbar-right button {
-    background-color: #333;
-    border: none;
-    padding: 8px 15px;
-  }
-  
-  .main-content {
-    color: #f0f0f0;
-    padding: 30px;
-  }
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
 
-  .credit-card-info, .credit-card-info label {
-    color: white;
-  }
-  
-  button {
-    background-color: #7c0808;
-    color: white;
-    padding: 10px;
-    cursor: pointer;
-  }
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.white-text {
+  color: #eeeeee;
+}
+.navbar {
+  background-color: #990000;
+  color: #eeeeee;
+  padding: 10px;
+  padding-right: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-left,
+.navbar-center,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+.navbar-left span {
+  font-size: 1.5em;
+}
+
+.navbar-right a,
+.navbar-right button {
+  color: #eeeeee;
+  margin-left: 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.navbar-right button {
+  border: none;
+  padding: 8px 15px;
+}
+
+.navbar-right a:hover {
+  text-decoration: underline;
+  color: #eeeeee;
+}
+
+.main-content {
+  color: #eeeeee;
+  padding: 30px;
+}
+
+.create-account-form {
+  padding: 20px;
+  border-radius: 8px; 
+  margin-top: 20px;
+  max-width: 500px;
+  margin: 0 auto; 
+}
+
+.create-account-form label {
+  margin-bottom: 8px;
+  color: #eeeeee;
+}
+
+.create-account-form input {
+  width: 100%; 
+  box-sizing: border-box;
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+.create-account-form p {
+  margin-top: -8px; 
+  color: #eeeeee;
+}
+
+.credit-card-info {
+  color: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.credit-card-info h2 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.credit-card-input label {
+  width: 100%; 
+}
+
+.credit-card-input input {
+  display: block;
+  margin-right: 16px; 
+  margin-top: 5px;
+}
+
+.credit-card-info input.cvv,
+.credit-card-info input.expiration {
+  width: calc(25% - 8px); 
+  margin-right: 16px;
+}
+
+.credit-card-info input:last-child {
+  margin-right: 0; 
+}
+
+.credit-card-info input:last-child {
+  margin-right: 0; 
+}
+
+button {
+  background-color: #990000;
+  color: #eeeeee;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.register-button:hover {
+  text-decoration: underline;
+  color: #eeeeee;
+}
+
+.register-button {
+  margin: auto;
+  width: 50%;
+}
+
+.confirmation-view button {
+  background-color: #990000;
+  color: #eeeeee;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.confirmation-view button:hover {
+  text-decoration: underline;
+  color: #eeeeee;
+}
