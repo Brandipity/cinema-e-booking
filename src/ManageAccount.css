@@ -61,6 +61,12 @@ body {
   margin: 0 auto; 
 }
 
+.promotion-checkbox {
+  display: block;
+  align-items: center;
+  margin: auto;
+}
+
 .create-account-form label {
   margin-bottom: 8px;
   color: #eeeeee;
