@@ -1,20 +1,35 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './ForgotPassword.css';
-//import axios to make HTTP requests 
-import axios from 'axios';
+import ForgotPasswordEmailSender from './ForgotPasswordEmailSender'; //added forgotpasswordemailsender
 
-import sendConfirmationEmail from './emailSender';
-
-
-function ForgotPassowrd() {
-  //Add more const values as need because this only accounts 
+function ForgotPassword() {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPopup, setShowPopup] = useState(false); 
+  const navigate = useNavigate();
 
+  const handleResetRequest = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Send reset email (email confirmation??)
+      await ForgotPasswordEmailSender(email, 'YOUR_RESET_LINK');
+
+      // Show the popup
+      setShowPopup(true);
+
+      // Redirect to login page after 1 seconds
+      setTimeout(() => {
+        navigate('/login');
+      }, 1000);
+    } catch (error) {
+      console.error('Error resetting password:', error);
+    }
+  };
 
   return (
     <div className="App">
-      {/* Navbar */}
       <nav className="navbar">
         <div className="navbar-left">
           <span>E-CINEMA</span>
@@ -25,33 +40,48 @@ function ForgotPassowrd() {
         </div>
       </nav>
 
-      <form className="forgot-password">
+      <form className="forgot-password" onSubmit={handleResetRequest}>
         <div className="input">
           <label>Enter Email:</label>
-          <input type="email" id="email" name="email" required></input>
-          <label>Enter Current Password:</label>
-          <input type="password" id="password" name="password" required></input>
-          <label>Enter New Password:</label>
-          {/* This is where the actual setting of the new password takes place. I don't know how they want the reset to be
-          but we can set it up so that when we click "Send reset request", it'll send an email and also add the changes
-          to the database. */}
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <label>Enter Old Password:</label>
           <input
             type="password"
+            id="oldpassword"
+            name="oldpassword"
+          />
+          <label>Enter New Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
           <p>*Password must contain at least one uppercase letter and one number.</p>
         </div>
         
-      </form>
-
-        {/* Reset Button */}
         <div className="register-button">
           <button type="submit" className="register-button">Send Reset Request</button>
         </div>
+      </form>
 
-      </div>
+      {/* Popup to just show it works :) */}
+      {showPopup && (
+        <div className="popup">
+          <p>Password reset email sent!</p>
+        </div>
+      )}
+    </div>
   );
 }
 
-export default ForgotPassowrd;
+export default ForgotPassword;
