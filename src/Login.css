@@ -64,6 +64,31 @@ body {
     cursor: pointer;
   }
   
+  .remember-me-button div {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  .remember-me-button fieldset {  
+    border: solid #eeeeee;
+    border: auto;
+  }
+  .remember-me-button legend {
+    padding: auto;
+    background:  #990000;
+    color: #eeeeee;
+  } 
+  .remember-me-button input[type="checkbox"]{
+    width: 13px;
+    height: 13px;
+    padding: 25px;
+    border: 5px solid black;
+  }
+  .remember-me-button input[type="checkbox"],
+  .remember-me-button label {
+      display: inline; 
+      margin-right: 8px; 
+  }
+
   .options-section {
     width: 40%;
   }

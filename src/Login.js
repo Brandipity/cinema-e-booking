@@ -69,6 +69,12 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)} 
             />
 
+            {/* Remember Me Button */}
+            <div class="remember-me">
+              <input type="checkbox" id="remember-me-button"/>
+              <label for="remember-me-button">Remember Me</label>
+            </div>
+
             {/* Use button instead of Link for form submission */}
             <button type="submit"><Link to="/registereduser">Login</Link></button>
           </form>
