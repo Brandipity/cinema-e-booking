@@ -1,86 +1,108 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ForgotPassword.css';
-import ForgotPasswordEmailSender from './ForgotPasswordEmailSender'; //added forgotpasswordemailsender
+import axios from 'axios';
 
 function ForgotPassword() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPopup, setShowPopup] = useState(false); 
+  const [username, setUsername] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleResetRequest = async (e) => {
+  const handlePasswordChange = async (e) => {
     e.preventDefault();
 
     try {
-      // Send reset email (email confirmation??)
-      await ForgotPasswordEmailSender(email, 'YOUR_RESET_LINK');
+      // checking for username and old password
+      //TODO: I need to implement the endpoint for this
+      const response = await axios.post('/api/users/checkPassword', {
+        username,
+        oldPassword,
+      });
 
-      // Show the popup
-      setShowPopup(true);
+      if (response.data.success) {
+        // update that shit
+        await axios.put(`/api/users/${response.data.userId}`, {
+          password: newPassword,
+        });
 
-      // Redirect to login page after 1 seconds
-      setTimeout(() => {
-        navigate('/login');
-      }, 1000);
+        setShowPopup(true);
+
+        setTimeout(() => {
+          navigate('/login');
+        }, 1000);
+      } else {
+        setError('Invalid username or old password');
+      }
     } catch (error) {
-      console.error('Error resetting password:', error);
+      console.error('Error changing password:', error);
+      setError('An error occurred while changing the password');
     }
   };
 
   return (
-    <div className="App">
-      <nav className="navbar">
-        <div className="navbar-left">
-          <span>E-CINEMA</span>
-        </div>
-        <div className="navbar-right">
-          <a href="/guest">Continue as Guest</a>
-          <a href="/login">Login</a>
-        </div>
-      </nav>
+      <div className="App">
+        <nav className="navbar">
+          <div className="navbar-left">
+            <span>E-CINEMA</span>
+          </div>
+          <div className="navbar-right">
+            <a href="/guest">Continue as Guest</a>
+            <a href="/login">Login</a>
+          </div>
+        </nav>
+        <form className="forgot-password" onSubmit={handlePasswordChange}>
+          <div className="input">
+            <label>Enter Username:</label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+            />
+            <label>Enter Old Password:</label>
+            <input
+                type="password"
+                id="oldPassword"
+                name="oldPassword"
+                value={oldPassword}
+                onChange={(e) => setOldPassword(e.target.value)}
+                required
+            />
+            <label>Enter New Password:</label>
+            <input
+                type="password"
+                id="newPassword"
+                name="newPassword"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                required
+            />
+            <p>*Password must contain at least one uppercase letter and one number.</p>
+          </div>
 
-      <form className="forgot-password" onSubmit={handleResetRequest}>
-        <div className="input">
-          <label>Enter Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <label>Enter Old Password:</label>
-          <input
-            type="password"
-            id="oldpassword"
-            name="oldpassword"
-          />
-          <label>Enter New Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <p>*Password must contain at least one uppercase letter and one number.</p>
-        </div>
-        
-        <div className="register-button">
-          <button type="submit" className="register-button">Send Reset Request</button>
-        </div>
-      </form>
+          {error && <p className="error">{error}</p>}
 
-      {/* Popup to just show it works :) */}
-      {showPopup && (
-        <div className="popup">
-          <p>Password reset email sent!</p>
-        </div>
-      )}
-    </div>
+          <div className="register-button">
+            <button type="submit" className="register-button">
+              Change Password
+            </button>
+          </div>
+        </form>
+
+
+        {/* Popup to just show it works :) */}
+        {showPopup && (
+            <div className="popup">
+              <p>Password reset email sent!</p>
+            </div>
+        )}
+      </div>
   );
 }
 
