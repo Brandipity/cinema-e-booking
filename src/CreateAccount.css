@@ -114,6 +114,30 @@ body {
   margin-right: 0; 
 }
 
+.promotionsCheckBox div {
+  margin-bottom: 5px;
+}
+.promotionsCheckBox fieldset {  
+  border: solid #eeeeee;
+  border: auto;
+}
+.promotionsCheckBox legend {
+  padding: auto;
+  background:  #990000;
+  color: #eeeeee;
+} 
+.promotionsCheckBox input[type="checkbox"]{
+  width: 13px;
+  height: 13px;
+  padding: 25px;
+  border: 5px solid black;
+}
+.promotionsCheckBox input[type="checkbox"],
+.promotionsCheckBox label {
+    display: inline; /* or display: inline; */
+    margin-right: 8px; 
+}
+
 button {
   background-color: #990000;
   color: #eeeeee;

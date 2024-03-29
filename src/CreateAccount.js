@@ -173,6 +173,12 @@ function CreateAccount() {
           </div>
         </div>
 
+        {/* Promotions Button */}
+        <div class="promotionsCheckBox">
+          <input type="checkbox" id="promotionsCheckBox"/>
+          <label for="promotionsCheckBox">Subscribe to Promotion Emails</label>
+        </div>
+
         {/* Register Button */}
         <div className="register-button">
           <button type="submit" className="register-button">Create Account</button>
