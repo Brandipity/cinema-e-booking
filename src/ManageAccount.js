@@ -68,7 +68,7 @@ function ManageAccount({ userId }) {
                 </div>
                 <div className="navbar-right">
                     <Link to="/registereduser">Back to Home</Link>
-                    <Link to="/logout">Logout</Link>
+                    <Link to="/login">Logout</Link>
                 </div>
             </nav>
 
