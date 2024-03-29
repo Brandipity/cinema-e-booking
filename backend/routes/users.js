@@ -42,6 +42,44 @@ router.post('/', async (request, response) => {
 });
 
 
+// User login
+router.post('/adminLogin', (request, response) => {
+    const { username, password } = request.body;
+
+    // validate data
+    if (!username || !password) {
+        return response.status(400).json({ error: 'Missing required fields: username and password are required' });
+    }
+
+    const sql = `SELECT admin_id, username, password_hash FROM admins WHERE username = ?`;
+
+    db.get(sql, [username], async (err, admin) => {
+        if (err) {
+            console.error(err.message);
+            response.status(500).json({ error: err.message });
+            return;
+        }
+
+        if (!admin) {
+            return response.status(401).json({ error: 'Invalid username or password' });
+        }
+
+        try {
+            const passwordMatch = await bcrypt.compare(password, admin.password_hash);
+
+            if (!passwordMatch) {
+                return response.status(401).json({ error: 'Invalid username or password' });
+            }
+
+            response.json({ message: 'Admin login successful', adminId: admin.admin_id });
+        } catch (error) {
+            console.error('Error during admin login:', error);
+            response.status(500).json({ error: 'Internal server error' });
+        }
+    });
+});
+
+
 // get user details by userId
 router.get('/:userId', (request, response) => {
     const { userId } = request.params;

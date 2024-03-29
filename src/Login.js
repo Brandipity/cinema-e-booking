@@ -10,27 +10,26 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  async function handleSubmit(e) {
-      e.preventDefault();
-      setLoading(true);
-      setError(""); 
-      try {
-        // Send login request to backend
-        const response = await axios.post('/api/login', {
-            username,
-            password
-        });
-
-        // If login is successful, redirect to authenticated view
-        setLoading(false);
-        navigate("/registereduser");
-    } catch (err) {
-        // Handle login error
-        setLoading(false);
-        setError("Invalid username or password. Please try again.");
-        console.error("Login error:", err);
+    async function handleSubmit(e) {
+        e.preventDefault();
+        setLoading(true);
+        setError("");
+        try {
+            // sends the login request to backend
+            const response = await axios.post('http://localhost:3001/api/users/login', {
+                username,
+                password
+            });
+            // success!
+            setLoading(false);
+            navigate("/registereduser");
+        } catch (err) {
+            // fuck
+            setLoading(false);
+            setError("Invalid username or password. Please try again.");
+            console.error("Login error:", err);
+        }
     }
-}
 
   return (
     <div className="App">
