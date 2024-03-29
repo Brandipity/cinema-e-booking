@@ -13,6 +13,7 @@ import Cart from './Cart'
 import OrderSummary from './OrderSummary';
 import TicketBooking from "./TicketBooking";
 import AdminLogin from './AdminLogin';
+import AdminCreateAccount from './AdminCreateAccount';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/ordersummary" element={<OrderSummary />} />
         <Route path="/adminlogin" element={<AdminLogin />} />
+        <Route path="/admincreateaccount" element={<AdminCreateAccount/>} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>
