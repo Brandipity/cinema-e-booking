@@ -41,7 +41,7 @@ function Login() {
         </div>
          {/* Access Admin from login */}
         <div className="navbar-left">
-          <span><button><Link to="/admin">Admin</Link></button></span>
+          <span><button><Link to="/adminlogin">Admin Login</Link></button></span>
         </div>
       </nav>
 
