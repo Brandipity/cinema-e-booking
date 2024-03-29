@@ -69,9 +69,9 @@ function Login() {
             />
 
             {/* Remember Me Button */}
-            <div class="remember-me">
+            <div className="remember-me">
               <input type="checkbox" id="remember-me-button"/>
-              <label for="remember-me-button">Remember Me</label>
+              <label htmlFor="remember-me-button">Remember Me</label>
             </div>
 
             {/* Use button instead of Link for form submission */}

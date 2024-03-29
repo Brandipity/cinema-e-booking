@@ -72,6 +72,8 @@ function ManageAccount({ userId }) {
                 </div>
             </nav>
 
+         <div className="edit-profile"> Edit Profile </div>
+
             <form className="create-account-form" onSubmit={handleUpdateAccount}>
                 <label>Username:</label>
                 <input type="text" name="username" value={userData.username} onChange={handleChange} />

@@ -161,3 +161,12 @@ body {
   display: inline; /* or display: inline; */
   margin-right: 8px; 
 }
+
+.edit-profile {
+  display: flex;
+  margin-top: 4%;
+  text-decoration: underline;
+  color: white;
+  font-size: large;
+  font-weight: bolder;
+}
