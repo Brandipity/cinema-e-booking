@@ -89,8 +89,9 @@ function ManageAccount({ userId }) {
                 <label>Phone Number:</label>
                 <input type="tel" name="phoneNumber" value={userData.phoneNumber} onChange={handleChange} />
 
-                <label>Mailing Address:</label>
-                <input type="text" name="mailingAddress" value={userData.mailingAddress} onChange={handleChange} />
+                
+                <label className="email">Email:</label>
+                <p>{userData.email}</p>
 
                 <div className="credit-card-info">
                     <h2>Credit Card Information (Optional)</h2>
@@ -116,7 +117,7 @@ function ManageAccount({ userId }) {
                       checked={userData.receivePromotions}
                       onChange={handleChange}
                   />
-                  Opt-in to Promotions </label> {/* WHY is this noce centering !! */}
+                  Subscribe to Promotion Emails </label>
                 </div>
 
 

@@ -61,6 +61,11 @@ body {
   margin: 0 auto; 
 }
 
+.create-account-form p {
+  margin-top: 10px;
+
+}
+
 .promotion-checkbox {
   display: block;
   align-items: center;
@@ -79,9 +84,11 @@ body {
   margin-bottom: 16px;
 }
 
-.create-account-form p {
-  margin-top: -8px; 
+.create-account-form p, 
+.create-account-form label {
+  margin-top: 8px; 
   color: #eeeeee;
+  display: inline;
 }
 
 .credit-card-info {
@@ -120,14 +127,7 @@ body {
   margin-right: 0; 
 }
 
-/* button {
-  background-color: #990000;
-  color: #eeeeee;
-  padding: 10px;
-  cursor: pointer;
-} */
-
-.register-button:hover {
+.edit-view button:hover {
   text-decoration: underline;
   color: #eeeeee;
 }

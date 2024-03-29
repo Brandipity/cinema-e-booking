@@ -98,6 +98,11 @@ body {
   text-decoration: none;
 }
 
+.footer a:hover {
+  text-decoration: underline;
+  color: #333;
+}
+
 @media (max-width: 768px) {
   .movie-list {
     grid-template-columns: repeat(2, 1fr);
