@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../db/database');
 const bcrypt = require('bcrypt');
 
+
 // add a new user
 router.post('/', async (request, response) => {
     const { username, password, email, firstName, lastName, phoneNumber, cardNumber, expiryDate, cardholderName, securityCode } = request.body;
@@ -179,5 +180,84 @@ router.put('/activate/:confirmationToken', async (request, response) => {
         response.status(500).json({ error: 'Internal server error' });
     }
 });
+
+
+// send the password reset email
+router.post('/forgot-password', (request, response) => {
+    const { email, username } = request.body;
+
+    // validate
+    if (!email || !username) {
+        return response.status(400).json({ error: 'Email and username are required' });
+    }
+
+    // check if the user exists in the database
+    const sql = 'SELECT * FROM users WHERE email = ? AND username = ?';
+    db.get(sql, [email, username], (err, user) => {
+        if (err) {
+            console.error('Error checking user:', err);
+            return response.status(500).json({ error: 'Internal server error' });
+        }
+
+        if (!user) {
+            return response.status(404).json({ error: 'User not found' });
+        }
+
+        // generate the reset token
+        const resetToken = `${user.user_id}-${user.phoneNumber}`;
+
+        // store the reset token in the database, associated with the user's account
+        const updateSql = 'UPDATE users SET reset_token = ? WHERE user_id = ?';
+        db.run(updateSql, [resetToken, user.user_id], (err) => {
+            if (err) {
+                console.error('Error updating reset token:', err);
+                return response.status(500).json({ error: 'Internal server error' });
+            }
+
+            response.json({ success: true, resetToken: resetToken });
+        });
+    });
+});
+
+router.put('/reset-password/:resetToken', async (request, response) => {
+    const { resetToken } = request.params;
+    const { newPassword } = request.body;
+
+    if (!newPassword) {
+        return response.status(400).json({ error: 'New password is required' });
+    }
+
+    try {
+        const [userId, phoneNumber] = resetToken.split('-');
+
+        const sql = `SELECT * FROM users WHERE user_id = ? AND phoneNumber = ?`;
+        db.get(sql, [userId, phoneNumber], async (err, user) => {
+            if (err) {
+                console.error(err.message);
+                return response.status(500).json({ error: 'Internal server error' });
+            }
+
+            if (!user) {
+                return response.status(400).json({ error: 'Invalid reset token' });
+            }
+
+            const passwordHash = await bcrypt.hash(newPassword, 10);
+
+            const updateSql = `UPDATE users SET password_hash = ? WHERE user_id = ?`;
+            db.run(updateSql, [passwordHash, userId], function(err) {
+                if (err) {
+                    console.error(err.message);
+                    return response.status(500).json({ error: 'Internal server error' });
+                }
+
+                response.json({ message: 'Password reset successfully' });
+            });
+        });
+    } catch (error) {
+        console.error('Error resetting password:', error);
+        response.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 module.exports = router;

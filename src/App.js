@@ -17,6 +17,7 @@ import AdminCreateAccount from './AdminCreateAccount';
 import ForgotPassword from './ForgotPassword';
 import ConfirmationPage from './ConfirmationPage';
 import ConfirmationSent from './ConfirmationSent';
+import ResetPassword from './ResetPassword';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Route path="/admincreateaccount" element={<AdminCreateAccount/>} />
         <Route path="/forgotpassword" element={<ForgotPassword/>} />
         <Route path="/confirm/:token" element={<ConfirmationPage />} />
+        <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
         <Route path="/confirmation-sent" element={<ConfirmationSent />} />
       </Routes>
     </Router>

@@ -1,45 +1,52 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ForgotPassword.css';
 import axios from 'axios';
+import emailjs from "emailjs-com";
+
+async function sendPasswordResetEmail(email, username, resetToken) {
+  const resetUrl = `http://localhost:3000/reset-password/${resetToken}`;
+
+  const templateParams = {
+    to_email: email,
+    username: username,
+    reset_url: resetUrl,
+  };
+
+  try {
+    await emailjs.send('service_pfnvmol', 'template_g8maqnv', templateParams, '0yAX7vO20pm2Hs_Ye');
+    console.log('Password reset email sent successfully');
+  } catch (error) {
+    console.error('Error sending password reset email:', error);
+  }
+}
 
 function ForgotPassword() {
+  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [showPopup, setShowPopup] = useState(false);
-  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  const handlePasswordChange = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // checking for username and old password
-      //TODO: I need to implement the endpoint for this
-      const response = await axios.post('/api/users/checkPassword', {
+      // send the forgot password request to the server
+      const response = await axios.post('http://localhost:3001/api/users/forgot-password', {
+        email,
         username,
-        oldPassword,
       });
 
       if (response.data.success) {
-        // update that shit
-        await axios.put(`/api/users/${response.data.userId}`, {
-          password: newPassword,
-        });
-
-        setShowPopup(true);
-
-        setTimeout(() => {
-          navigate('/login');
-        }, 1000);
+        // send the password reset email
+        await sendPasswordResetEmail(email, username, response.data.resetToken);
+        setMessage('If the provided email and username are valid, a password reset link will be sent to your email.');
       } else {
-        setError('Invalid username or old password');
+        setMessage('Invalid email or username. Please try again.');
       }
     } catch (error) {
-      console.error('Error changing password:', error);
-      setError('An error occurred while changing the password');
+      console.error('Error requesting password reset:', error);
+      setMessage('An error occurred while requesting the password reset.');
     }
   };
 
@@ -54,8 +61,17 @@ function ForgotPassword() {
             <a href="/login">Login</a>
           </div>
         </nav>
-        <form className="forgot-password" onSubmit={handlePasswordChange}>
+        <form className="forgot-password" onSubmit={handleSubmit}>
           <div className="input">
+            <label>Enter Email:</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+            />
             <label>Enter Username:</label>
             <input
                 type="text"
@@ -65,43 +81,16 @@ function ForgotPassword() {
                 onChange={(e) => setUsername(e.target.value)}
                 required
             />
-            <label>Enter Old Password:</label>
-            <input
-                type="password"
-                id="oldPassword"
-                name="oldPassword"
-                value={oldPassword}
-                onChange={(e) => setOldPassword(e.target.value)}
-                required
-            />
-            <label>Enter New Password:</label>
-            <input
-                type="password"
-                id="newPassword"
-                name="newPassword"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                required
-            />
-            <p>*Password must contain at least one uppercase letter and one number.</p>
           </div>
 
-          {error && <p className="error">{error}</p>}
+          {message && <p className="message">{message}</p>}
 
           <div className="register-button">
             <button type="submit" className="register-button">
-              Change Password
+              Request Password Reset
             </button>
           </div>
         </form>
-
-
-        {/* Popup to just show it works :) */}
-        {showPopup && (
-            <div className="popup">
-              <p>Password reset email sent!</p>
-            </div>
-        )}
       </div>
   );
 }
