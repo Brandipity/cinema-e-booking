@@ -26,7 +26,13 @@ function Login() {
         } catch (err) {
             // fuck
             setLoading(false);
-            setError("Invalid username or password. Please try again.");
+            if (err.response && err.response.status === 401) {
+                setError("Invalid username or password. Please try again.");
+            } else if (err.response && err.response.status === 403) {
+                setError("Account is not activated. Please check your email for the activation link.");
+            } else {
+                setError("An error occurred. Please try again later.");
+            }
             console.error("Login error:", err);
         }
     }
@@ -77,6 +83,7 @@ function Login() {
             {/* Use button instead of Link for form submission */}
             <button type="submit"><Link to="/registereduser">Login</Link></button>
           </form>
+            {error && <p className="error-message">{error}</p>}
           <button type="submit"><Link to="/forgotpassword">Forgot Password</Link></button>
         </div>
 

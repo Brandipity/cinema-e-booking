@@ -1,9 +1,12 @@
 import emailjs from 'emailjs-com';
 
-async function sendConfirmationEmail(email, username) {
+async function sendConfirmationEmail(email, username, confirmationToken) {
+    const confirmationUrl = `http://localhost:3000/confirm/${confirmationToken}`;
+
     const templateParams = {
         to_email: email,
         username: username,
+        confirmation_url: confirmationUrl,
     };
 
     try {
@@ -13,5 +16,6 @@ async function sendConfirmationEmail(email, username) {
         console.error('Error sending confirmation email:', error);
     }
 }
+
 
 export default sendConfirmationEmail;

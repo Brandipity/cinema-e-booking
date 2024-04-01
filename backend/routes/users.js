@@ -41,45 +41,6 @@ router.post('/', async (request, response) => {
     }
 });
 
-
-// User login
-router.post('/adminLogin', (request, response) => {
-    const { username, password } = request.body;
-
-    // validate data
-    if (!username || !password) {
-        return response.status(400).json({ error: 'Missing required fields: username and password are required' });
-    }
-
-    const sql = `SELECT admin_id, username, password_hash FROM admins WHERE username = ?`;
-
-    db.get(sql, [username], async (err, admin) => {
-        if (err) {
-            console.error(err.message);
-            response.status(500).json({ error: err.message });
-            return;
-        }
-
-        if (!admin) {
-            return response.status(401).json({ error: 'Invalid username or password' });
-        }
-
-        try {
-            const passwordMatch = await bcrypt.compare(password, admin.password_hash);
-
-            if (!passwordMatch) {
-                return response.status(401).json({ error: 'Invalid username or password' });
-            }
-
-            response.json({ message: 'Admin login successful', adminId: admin.admin_id });
-        } catch (error) {
-            console.error('Error during admin login:', error);
-            response.status(500).json({ error: 'Internal server error' });
-        }
-    });
-});
-
-
 // get user details by userId
 router.get('/:userId', (request, response) => {
     const { userId } = request.params;
@@ -143,6 +104,80 @@ router.delete('/:userId', (request, response) => {
         }
         response.json({ message: 'User deleted successfully', changes: this.changes });
     });
+});
+
+
+// user login
+
+router.post('/login', (request, response) => {
+    const { username, password } = request.body;
+    // validate data
+    if (!username || !password) {
+        return response.status(400).json({ error: 'Missing required fields: username and password are required' });
+    }
+    const sql = `SELECT user_id, username, password_hash, activated FROM users WHERE username = ?`;
+    db.get(sql, [username], async (err, user) => {
+        if (err) {
+            console.error(err.message);
+            response.status(500).json({ error: err.message });
+            return;
+        }
+        if (!user) {
+            return response.status(401).json({ error: 'Invalid username or password' });
+        }
+        if (!user.activated) {
+            return response.status(403).json({ error: 'Account is not activated. Please check your email for the activation link.' });
+        }
+        try {
+            const passwordMatch = await bcrypt.compare(password, user.password_hash);
+
+            if (!passwordMatch) {
+                return response.status(401).json({ error: 'Invalid username or password' });
+            }
+            response.json({ message: 'Login successful', userId: user.user_id });
+        } catch (error) {
+            console.error('Error during login:', error);
+            response.status(500).json({ error: 'Internal server error' });
+        }
+    });
+});
+
+// confirm user account
+
+router.put('/activate/:confirmationToken', async (request, response) => {
+    const { confirmationToken } = request.params;
+
+    try {
+        // parse the token to ensure account is present
+        const [userId, phoneNumber] = confirmationToken.split('-');
+
+        // trust but verify
+        const sql = `SELECT * FROM users WHERE user_id = ? AND phoneNumber = ? AND activated = 0`;
+        db.get(sql, [userId, phoneNumber], async (err, user) => {
+            if (err) {
+                console.error(err.message);
+                return response.status(500).json({ error: 'Internal server error' });
+            }
+
+            if (!user) {
+                return response.status(400).json({ error: 'Invalid or expired confirmation token' });
+            }
+
+            // activate the user's account
+            const updateSql = `UPDATE users SET activated = 1 WHERE user_id = ?`;
+            db.run(updateSql, [userId], function(err) {
+                if (err) {
+                    console.error(err.message);
+                    return response.status(500).json({ error: 'Internal server error' });
+                }
+
+                response.json({ message: 'Account activated successfully' });
+            });
+        });
+    } catch (error) {
+        console.error('Error activating account:', error);
+        response.status(500).json({ error: 'Internal server error' });
+    }
 });
 
 module.exports = router;

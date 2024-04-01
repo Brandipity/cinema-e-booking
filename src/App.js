@@ -15,6 +15,8 @@ import TicketBooking from "./TicketBooking";
 import AdminLogin from './AdminLogin';
 import AdminCreateAccount from './AdminCreateAccount';
 import ForgotPassword from './ForgotPassword';
+import ConfirmationPage from './ConfirmationPage';
+import ConfirmationSent from './ConfirmationSent';
 
 
 function App() {
@@ -37,7 +39,8 @@ function App() {
         <Route path="/adminlogin" element={<AdminLogin />} />
         <Route path="/admincreateaccount" element={<AdminCreateAccount/>} />
         <Route path="/forgotpassword" element={<ForgotPassword/>} />
-        {/* Add more routes as needed */}
+        <Route path="/confirm/:token" element={<ConfirmationPage />} />
+        <Route path="/confirmation-sent" element={<ConfirmationSent />} />
       </Routes>
     </Router>
   );

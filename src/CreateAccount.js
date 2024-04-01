@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './CreateAccount.css';
-//import axios to make HTTP requests 
 import axios from 'axios';
 
 import sendConfirmationEmail from './emailSender';
@@ -44,10 +43,14 @@ function CreateAccount() {
       const response = await axios.post('http://localhost:3001/api/users', userData);
       console.log('Account created:', response.data);
 
-      await sendConfirmationEmail(email, username);
+      // generate the confirmationToken
+      const confirmationToken = `${response.data.userId}-${phoneNumber}`;
 
-      // redirects the user after successful account creation
-      navigate('/registereduser');
+      // send the confirmation email with the unique URL
+      await sendConfirmationEmail(email, username, confirmationToken);
+
+      navigate('/confirmation-sent');
+
     } catch (error) {
       console.error('Error creating account:', error.response?.data?.error || error.message);
     }
