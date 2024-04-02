@@ -22,6 +22,8 @@ function Login() {
             });
             // success!
             setLoading(false);
+            // get JWT token from response
+            localStorage.setItem('token', response.data.token);
             navigate("/registereduser");
         } catch (err) {
             // fuck

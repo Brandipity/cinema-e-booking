@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ManageAccount.css';
+import { getUserIdFromToken } from './utils/auth';
 
-function ManageAccount({ userId }) {
+function ManageAccount() {
     const [userData, setUserData] = useState({
         username: '',
         password: '',
@@ -17,6 +18,7 @@ function ManageAccount({ userId }) {
         cardExpiration: '',
         receivePromotions: false
     });
+    const userId = getUserIdFromToken();
     const [showConfirmation, setShowConfirmation] = useState(false);
     const navigate = useNavigate();
 
@@ -28,7 +30,7 @@ function ManageAccount({ userId }) {
    //this will display the username of the user in row 1 of the database, you can also change that username
     const fetchUserData = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/api/users/1`);
+            const response = await axios.get(`http://localhost:3001/api/users/${userId}`);
             setUserData(response.data);
         } catch (error) {
             console.error('Error fetching user data:', error.response?.data?.error || error.message);

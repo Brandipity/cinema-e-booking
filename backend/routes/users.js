@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/database');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const secretKey = 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcxMTk5NTU2NCwiaWF0IjoxNzExOTk1NTY0fQ.nzFdLzmWZpp7SGGrajfA9f60HorvcwOik6liOYnCdcg';
 
 
 // add a new user
@@ -135,7 +137,8 @@ router.post('/login', (request, response) => {
             if (!passwordMatch) {
                 return response.status(401).json({ error: 'Invalid username or password' });
             }
-            response.json({ message: 'Login successful', userId: user.user_id });
+            const token = jwt.sign({ userId: user.user_id }, secretKey);
+            response.json({ message: 'Login successful', token });
         } catch (error) {
             console.error('Error during login:', error);
             response.status(500).json({ error: 'Internal server error' });
