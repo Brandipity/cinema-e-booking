@@ -3,27 +3,25 @@ const router = express.Router();
 const db = require('../db/database');
 
 // add a new promotion
-router.post('/', (request, response) => {
+router.post('/', async (request, response) => {
+
     const { promoCode, description, discountPercentage, validFrom, validUntil } = request.body;
 
-    if (!promoCode || discountPercentage == null || !validFrom || !validUntil) {
+    if (!promoCode || (discountPercentage === null || discountPercentage === undefined) || !validFrom || !validUntil) {
         return response.status(400).json({ error: 'Missing required fields' });
     }
 
-    const sql = `INSERT INTO promotions (promo_code, description, discount_percentage, valid_from, valid_until) VALUES (?, ?, ?, ?, ?)`;
+    if (typeof discountPercentage !== 'number' || discountPercentage < 0 || discountPercentage > 100) {
+        return response.status(400).json({ error: 'Invalid discount percentage' });
+    }
 
-    db.run(sql, [promoCode, description, discountPercentage, validFrom, validUntil], function(err) {
-        if (err) {
-            console.error(err.message);
-            response.status(500).json({ error: err.message });
-            return;
-        }
-        response.json({ message: 'Promotion added successfully', promoId: this.lastID });
-    });
+    const sql = `INSERT INTO promotions (promo_code, description, discount_percentage, valid_from, valid_until) VALUES (?, ?, ?, ?, ?)`;
+    const dbResponse = await db.run(sql, [promoCode, description, discountPercentage, validFrom, validUntil ]);
+    response.json({ message: 'Promo added successfully'});
 });
 
 // get all promotions
-router.get('/', (request, response) => {
+router.get('/', async (request, response) => {
     const sql = `SELECT * FROM promotions`;
 
     db.all(sql, [], (err, promotions) => {

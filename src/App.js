@@ -18,6 +18,7 @@ import ForgotPassword from './ForgotPassword';
 import ConfirmationPage from './ConfirmationPage';
 import ConfirmationSent from './ConfirmationSent';
 import ResetPassword from './ResetPassword';
+import ManageShowings from './ManageShowings';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/admin" element={<Admin />} />
             <Route path="/managepromotions" element={<ManagePromotions />} />
             <Route path="/managemovies" element={<ManageMovies />} />
+            <Route path="/manageshowings" element={<ManageShowings />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/ordersummary" element={<OrderSummary />} />
             <Route path="/adminlogin" element={<AdminLogin />} />

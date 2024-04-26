@@ -33,6 +33,10 @@ function Admin() {
           <button><Link to="/managepromotions">Manage Promotions</Link></button>
           <p>Create, edit, or delete promotions</p>
         </div>
+          <div className="admin-option">
+              <button><Link to="/manageshowings">Manage Showings</Link></button>
+              <p>Create, edit, or delete showtimes.</p>
+          </div>
       </div>
     </div>
   );
