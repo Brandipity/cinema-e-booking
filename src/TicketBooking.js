@@ -104,6 +104,7 @@ function TicketBooking() {
                         <option value="11">11</option>
                     </select>
                     <button onClick={() => console.log("Seat selected")}>Select Seat</button>
+                    <button onClick={() => console.log("Book Movie")}>Book Movie</button> {/* placeholder */}
                 </div>
             </div>
 
