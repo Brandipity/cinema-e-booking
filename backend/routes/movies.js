@@ -3,17 +3,32 @@ const router = express.Router();
 const db = require('../db/database');
 
 // endpoint to add a movie
+
 router.post('/', async (request, response) => {
     try {
-        const { id, title, description, releaseDate } = request.body;
-        // check to make sure all required fields are present
-        // prevents things like SQL injection (hopefully)
-        if (!title || !description || !releaseDate) {
+        const { tmdbId, title, description, releaseDate } = request.body;
+        if (!title || !description || !releaseDate || !tmdbId) {
             return response.status(400).json({ error: 'Missing required fields' });
         }
         const sql = `INSERT INTO movies (tmdbId, title, description, release_date) VALUES (?, ?, ?, ?)`;
-        const dbResponse = await db.run(sql, [id, title, description, releaseDate]);
+        const dbResponse = await db.run(sql, [tmdbId, title, description, releaseDate]); // Use tmdbId here (or else lol)
         response.json({ message: 'Movie added successfully', movieId: dbResponse.lastID });
+    } catch (err) {
+        console.error(err.message);
+        response.status(500).json({ error: err.message });
+    }
+});
+
+
+// endpoint to delete a movie
+
+router.delete('/', async (request, response) => {
+    try {
+        const { movieId } = request.query;  // Notice using query here
+        console.log('Deleting movie with ID:', movieId);
+        const sql = `DELETE FROM movies WHERE movie_id = ?`;
+        await db.run(sql, [movieId]);
+        response.json({ message: 'Movie deleted successfully' });
     } catch (err) {
         console.error(err.message);
         response.status(500).json({ error: err.message });

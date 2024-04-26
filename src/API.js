@@ -35,6 +35,13 @@ class API {
             .catch(err => console.error(err));
     }
 
+    static searchMovies(query) {
+        return fetch(`${API_URL}/search/movie?query=${encodeURIComponent(query)}&language=en-US&page=1`, options)
+            .then(response => response.json())
+            .then(data => data)
+            .catch(err => console.error(err));
+    }
+
     // Grabs details on a specific movie by ID
     // Documentation: https://developer.themoviedb.org/reference/movie-details
     static fetchMovieDetails(movieId) {
