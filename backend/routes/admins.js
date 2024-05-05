@@ -5,18 +5,18 @@ const bcrypt = require('bcrypt');
 
 // add an admin
 router.post('/', async (request, response) => {
-    const { username, password } = request.body;
+    const { username, password, isAdmin } = request.body; // Receive isAdmin from frontend
 
-    if (!username || !password) {
+    if (!username || !password || isAdmin === undefined) { // Check for missing fields
         return response.status(400).json({ error: 'Missing required fields' });
     }
 
     try {
         const passwordHash = await bcrypt.hash(password, 10);
 
-        const sql = `INSERT INTO admins (username, password_hash) VALUES (?, ?)`;
+        const sql = `INSERT INTO admins (username, password_hash, isAdmin) VALUES (?, ?, ?)`; // Update SQL query
 
-        db.run(sql, [username, passwordHash], function(err) {
+        db.run(sql, [username, passwordHash, isAdmin], function(err) {
             if (err) {
                 console.error(err.message);
                 response.status(500).json({ error: err.message });
@@ -26,6 +26,29 @@ router.post('/', async (request, response) => {
         });
     } catch (error) {
         console.error('Error creating admin:', error);
+        response.status(500).json({ error: 'Internal server error' });
+    }
+});
+// Endpoint to promote existing user to admin
+router.post('/promoteUser', async (request, response) => {
+    const { userId } = request.body;
+
+    if (!userId) {
+        return response.status(400).json({ error: 'Missing user ID' });
+    }
+
+    try {
+        const sql = `UPDATE users SET isAdmin = ? WHERE userId = ?`;
+        db.run(sql, [true, userId], function(err) {
+            if (err) {
+                console.error(err.message);
+                response.status(500).json({ error: err.message });
+                return;
+            }
+            response.json({ message: 'User promoted to admin successfully' });
+        });
+    } catch (error) {
+        console.error('Error promoting user to admin:', error);
         response.status(500).json({ error: 'Internal server error' });
     }
 });

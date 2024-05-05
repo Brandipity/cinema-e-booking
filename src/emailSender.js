@@ -1,5 +1,21 @@
 import emailjs from 'emailjs-com';
 
+async function sendPromotionEmail(promoCode) {
+    const promotionContent = `We have added a new promotion! Use promo code ${promoCode} for discounts.`;
+
+    const templateParams = {
+        promotion_content: promotionContent,
+    };
+
+    try {
+        // Use your email service's API to send the email
+        await emailjs.send('service_pfnvmol', 'template_uyzt4iv', templateParams, '0yAX7vO20pm2Hs_Ye');
+        console.log('Promotion email sent successfully');
+    } catch (error) {
+        console.error('Error sending promotion email:', error);
+    }
+}
+
 async function sendConfirmationEmail(email, username, confirmationToken) {
     const confirmationUrl = `http://localhost:3000/confirm/${confirmationToken}`;
 
@@ -17,5 +33,4 @@ async function sendConfirmationEmail(email, username, confirmationToken) {
     }
 }
 
-
-export default sendConfirmationEmail;
+export { sendPromotionEmail, sendConfirmationEmail };
