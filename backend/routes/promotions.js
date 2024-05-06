@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/database');
-const sendPromotionEmail = require('./emailSender'); // Import the sendPromotionEmail function
+
+//const sendPromotionEmail = require('./emailSender'); // Import the sendPromotionEmail function
  
 // add a new promotion
 router.post('/', async (request, response) => {
@@ -20,11 +21,16 @@ router.post('/', async (request, response) => {
         const dbResponse = await db.run(sql, [promoCode, description, discountPercentage, validFrom, validUntil]);
         const newPromotionId = dbResponse.lastID;
 
+
+        /* These calls will have to be made in the frontend, the server doesn't have access to emailSender
+
         // Construct promotion content
         const promotionContent = `${promoCode} - ${description} (Discount: ${discountPercentage}%)`;
 
         // Send email to users
         await sendPromotionEmail(promotionContent);
+
+         */
 
         response.json({ message: 'Promo added successfully' });
     } catch (error) {
