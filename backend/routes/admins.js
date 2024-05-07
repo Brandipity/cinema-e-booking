@@ -14,7 +14,7 @@ router.post('/', async (request, response) => {
     try {
         const passwordHash = await bcrypt.hash(password, 10);
 
-        const sql = `INSERT INTO admins (username, password_hash) VALUES (?, ?)`; // Update SQL query
+        const sql = `INSERT INTO admins (username, password_hash) VALUES (?, ?)`;
 
         db.run(sql, [username, passwordHash], function(err) {
             if (err) {
