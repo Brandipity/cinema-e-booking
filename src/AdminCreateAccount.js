@@ -7,6 +7,7 @@ function AdminCreateAccount() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [userId, setUserId] = useState(''); //define userId, get rid of error
   const [isAdmin, setIsAdmin] = useState(false); // State for admin status
   const navigate = useNavigate();
 
