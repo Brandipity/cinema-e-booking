@@ -1,25 +1,128 @@
-// TicketBooking.js
 
-// this file uses some JSX formatting, just trying it out
-
-import React from 'react';
-import {Navigate, useLocation} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import './TicketBooking.css';
-
-
+import { getUserIdFromToken } from './utils/auth';
+import axios from "axios";
 
 function TicketBooking() {
-
     const location = useLocation();
-    // prevents bad shit from happening if you use the navbar on this page
     const movie = location.state ? location.state.movie : null;
+    const [selectedShowtime, setSelectedShowtime] = useState('');
+    const [selectedAge, setSelectedAge] = useState('');
+    const [selectedSeatLetter, setSelectedSeatLetter] = useState('');
+    const [selectedSeatNumber, setSelectedSeatNumber] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
+    const [showtimes, setShowtimes] = useState([]);
 
-    // see above
+    useEffect(() => {
+        const checkLoginStatus = () => {
+            const token = localStorage.getItem('token');
+            setIsLoggedIn(!!token);
+        };
+
+        checkLoginStatus();
+    }, []);
+
+    useEffect(() => {
+        const fetchMovieId = async () => {
+            if (movie && movie.title) {
+                try {
+                    const response = await axios.get(`http://localhost:3001/api/movies/find-by-title`, {
+                        params: { title: movie.title }
+                    });
+                    console.log("Movie fetched with ID:", response.data);
+                    fetchShowtimes(response.data.movie_id);
+                } catch (error) {
+                    console.error('Error fetching movie ID:', error);
+                }
+            }
+        };
+
+        const fetchShowtimes = async (movieId) => {
+            try {
+                const response = await axios.get(`http://localhost:3001/api/screenings/movie/${movieId}`);
+                setShowtimes(response.data);
+            } catch (error) {
+                console.error('Error fetching showtimes:', error);
+            }
+        };
+
+        fetchMovieId();
+    }, [movie]); // This effect depends on 'movie'
+
     if (!movie) {
         return <Navigate to="/" replace />;
     }
 
+    const handleShowtimeChange = (e) => {
+        setSelectedShowtime(e.target.value);
+    };
 
+    const handleAgeChange = (e) => {
+        setSelectedAge(e.target.value);
+    };
+
+    const handleSeatLetterChange = (e) => {
+        setSelectedSeatLetter(e.target.value);
+    };
+
+    const handleSeatNumberChange = (e) => {
+        setSelectedSeatNumber(e.target.value);
+    };
+
+    const handleBookMovie = async () => {
+        if (!isLoggedIn) {
+            // Display an error message or redirect to the login page
+            alert('You must be a registered user to book a ticket.');
+            navigate('/login');
+            return;
+        }
+
+        // Prepare the booking data
+        const bookingData = {
+            userId: getUserIdFromToken(),
+            screeningId: selectedShowtime,
+            numSeats: 1,
+            seat: `${selectedSeatLetter}${selectedSeatNumber}`,
+            confirmed: 'FALSE',
+            bookingTime: new Date().toISOString(),
+        };
+
+        try {
+            // Send the booking data to the server
+            const response = await axios.post('http://localhost:3001/api/bookings', bookingData);
+
+            if (response.data.bookingId) {
+                // Booking added to cart successfully
+                console.log('Booking added to cart. Booking ID:', response.data.bookingId);
+
+                // Create a cart entry for the booking
+                const cartData = {
+                    userId: getUserIdFromToken(),
+                    bookingId: response.data.bookingId,
+                };
+
+                const cartResponse = await axios.post('http://localhost:3001/api/carts', cartData);
+
+                if (cartResponse.data.cartId) {
+                    console.log('Cart created. Cart ID:', cartResponse.data.cartId);
+                    // Redirect to the cart page or display a success message
+                    navigate('/cart');
+                } else {
+                    console.error('Failed to create cart. Server response:', cartResponse.data);
+                    alert('Failed to add the ticket to the cart. Please try again later.');
+                }
+            } else {
+                console.error('Failed to add booking to cart. Server response:', response.data);
+                alert('Failed to add the ticket to the cart. Please try again later.');
+            }
+        } catch (error) {
+            console.error('Error adding booking to cart:', error);
+            alert('An error occurred while adding the ticket to the cart. Please try again later.');
+        }
+    };
 
     return (
         <div className="ticket-booking">
@@ -51,63 +154,50 @@ function TicketBooking() {
 
             <div className="dropdowns">
                 <div className="showtime-area">
-                    {/* dropdown */}
+                    {/* Showtime dropdown */}
                     <label htmlFor="showtimes" className="showtime-label">Choose a showtime:</label>
-                    <select id="showtimes" name="showtimes">
-                        <option value="1">14:00</option>
-                        <option value="2">16:00</option>
-                        <option value="3">18:00</option>
-                        <option value="4">20:00</option>
-                        <option value="5">22:00</option>
+                    <select id="showtimes" name="showtimes" value={selectedShowtime} onChange={handleShowtimeChange}>
+                        <option value="">Select a showtime</option>
+                        {showtimes.map((showtime) => (
+                            <option key={showtime.screening_id} value={showtime.screening_id}>
+                                {new Date(showtime.screening_start).toLocaleString()}
+                            </option>
+                        ))}
                     </select>
-                    {/* we do a little testing */}
-                    <button onClick={() => console.log("Add Showtime Clicked")}>Add Showtime</button>
 
-                    {/* dropdown */}
+                    {/* Age dropdown */}
                     <label>Ticket Age:</label>
-                    <select id="Age" name="Age">
-                        <option value="1">Child</option>
-                        <option value="2">Adult</option>
-                        <option value="3">Senior</option>
+                    <select id="age" name="age" value={selectedAge} onChange={handleAgeChange}>
+                        <option value="">Select an age</option>
+                        <option value="Child">Child</option>
+                        <option value="Adult">Adult</option>
+                        <option value="Senior">Senior</option>
                     </select>
-                    {/* we do a little testing */}
-                    <button onClick={() => console.log("Ticket Age slected")}>Select Age</button>
                 </div>
-
-                    <p>*Row A is closest to the screen.</p>
-                    <p>*Seats numbers increment from right to left.</p>
-
                 <div className="seat">
-                    
-                    {/* dropdown */}
+                    {/* Seat letter dropdown */}
                     <label>Seat Letter:</label>
-                    <select id="Seat" name="Seat">
+                    <select id="seatLetter" name="seatLetter" value={selectedSeatLetter} onChange={handleSeatLetterChange}>
+                        <option value="">Select a seat letter</option>
                         <option value="A">A</option>
                         <option value="B">B</option>
                         <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
                     </select>
+
+                    {/* Seat number dropdown */}
                     <label>Seat Number:</label>
-                    <select id="Seat" name="Seat">
+                    <select id="seatNumber" name="seatNumber" value={selectedSeatNumber} onChange={handleSeatNumberChange}>
+                        <option value="">Select a seat number</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
                     </select>
-                    <button onClick={() => console.log("Seat selected")}>Select Seat</button>
-                    <button onClick={() => console.log("Book Movie")}>Book Movie</button> {/* placeholder */}
+
+                    {/* Book movie button */}
+                    <button onClick={handleBookMovie}>Add to Cart</button>
                 </div>
             </div>
-
 
             <footer className="footer">
                 <div className="footer-category">
@@ -135,12 +225,9 @@ function TicketBooking() {
                 </div>
             </footer>
         </div>
-
     );
 }
 
 export default TicketBooking;
-
-
 
 

@@ -1,32 +1,46 @@
+:root {
+  --main-bg-color: #7c0808; /* Primary background color */
+  --text-color: white; /* Primary text color */
+  --footer-bg-color: #f0f0f0; /* Footer background color */
+  --footer-text-color: #333; /* Footer text color */
+  --main-padding: 20px; /* Standard padding */
+  --button-padding: 10px; /* Button padding */
+  --small-font-size: 14px; /* Smaller font size for less important text */
+  --input-width-small: 150px; /* Width for smaller input fields like dropdowns */
+}
+
+body, html {
+  color: var(--text-color); /* Default text color */
+  font-family: Arial, sans-serif; /* Standard font for better readability */
+}
 
 .ticket-booking {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  color: white;
+  background-color: #282c34; /* Darker background for better contrast */
 }
 
-.content-area {
-  flex-grow: 1;
+.content-area, .age-select, .seat {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 20px;
+  padding: var(--main-padding);
 }
 
 .footer {
   display: flex;
-  color: #333;
+  color: var(--footer-text-color);
   justify-content: space-around;
-  background-color: #f0f0f0;
-  padding: 20px;
+  background-color: var(--footer-bg-color);
+  padding: var(--main-padding);
 }
 
 .footer-category {
   text-align: center;
 }
 
-.footer-category h3 {
+.footer-category h3, .footer ul {
   margin-bottom: 10px;
 }
 
@@ -38,65 +52,52 @@
 .footer li {
   margin-bottom: 5px;
   cursor: pointer;
+  font-size: var(--small-font-size);
+}
+
+.movie-details, .showtime-area, .age-select, .seat {
+  display: flex;
+  flex-direction: column;
+  padding: var(--main-padding);
 }
 
 .movie-details img {
   margin-right: 10px;
+  width: 150px; /* Reduce width for better proportion */
+  height: auto; /* Maintain aspect ratio */
 }
 
-.movie-details {
-  display: flex;
-}
-
-
-.showtime-area {
-  width: 10%;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
-
-.showtime-label {
-  margin-bottom: 10px;
+.showtime-label, button, select {
+  margin-bottom: var(--button-padding);
 }
 
 button, select {
-  background-color: #7c0808;
-  color: white;
-  padding: 10px;
-  margin-bottom: 10px;
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
+  padding: var(--button-padding);
   border: none;
   cursor: pointer;
-}
-
-.age-select {
-  padding: 20px;
-  width: 10%;
-  display: flex;
-  flex-direction: column;
+  border-radius: 5px; /* Rounded corners for a more modern look */
+  width: var(--input-width-small); /* Uniform width for buttons and selects */
 }
 
 #imageContainer {
-  width: 300px; /* Adjust container width as needed */
-  height: 200px; /* Adjust container height as needed */
+  width: 150px; /* Smaller container size for the image */
+  height: 100px;
 }
 
 #myImage {
-  width: 100%; /* Make the image fill its container */
+  width: 100%;
   height: 100%;
-  object-fit: cover; /* Maintain aspect ratio while covering the container */
-}
-
-.seat {
-  padding: 20px;
-  width: 10%;
-  display: flex;
-  flex-direction: column;
+  object-fit: cover; /* Ensure the image covers the area without distortion */
 }
 
 .dropdowns {
-  margin-top: 1%;
-  margin-left: 3%;
-  margin-bottom: 2%;
+  display: flex; /* Align dropdowns side by side */
+  flex-direction: row; /* Horizontal layout for dropdowns */
+  gap: 10px; /* Space between dropdowns */
+  align-items: center; /* Vertically center align the dropdowns */
+  margin: 1% 3% 2%;
 }
+
 

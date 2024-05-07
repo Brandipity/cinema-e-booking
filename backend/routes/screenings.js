@@ -4,15 +4,15 @@ const db = require('../db/database');
 
 // add a new screening
 router.post('/', (request, response) => {
-    const { movieId, theaterNumber, screeningStart, seatsAvailable } = request.body;
+    const { movieId, screeningStart, theaterNumber, seatsAvailable } = request.body;
 
-    if (!movieId || !theaterNumber || !screeningStart || seatsAvailable == null) {
-        return response.status(400).json({ error: 'Missing required fields' });
-    }
+   if (!movieId || !theaterNumber || !screeningStart || seatsAvailable == null) {
+       return response.status(400).json({error: 'Missing required fields'});
+   }
 
-    const sql = `INSERT INTO screenings (movie_id, theater_number, screening_start, seats_available) VALUES (?, ?, ?, ?)`;
+    const sql = `INSERT INTO screenings (movie_id, screening_start, theater_number, seats_available) VALUES (?, ?, ?, ?)`;
 
-    db.run(sql, [movieId, theaterNumber, screeningStart, seatsAvailable], function(err) {
+    db.run(sql, [movieId, screeningStart, theaterNumber, seatsAvailable], function(err) {
         if (err) {
             console.error(err.message);
             response.status(500).json({ error: err.message });
@@ -69,5 +69,20 @@ router.delete('/:screeningId', (request, response) => {
         response.json({ message: 'Screening deleted successfully', changes: this.changes });
     });
 });
+
+router.get('/', (request, response) => {
+    const sql = 'SELECT * FROM screenings';
+
+    db.all(sql, [], (err, screenings) => {
+        if (err) {
+            console.error(err.message);
+            response.status(500).json({ error: err.message });
+            return;
+        }
+        response.json(screenings);
+    });
+});
+
+
 
 module.exports = router;

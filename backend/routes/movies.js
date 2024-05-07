@@ -80,4 +80,35 @@ router.get('/upcoming', (request, response) => {
         });
 });
 
+
+router.get('/find-by-title', async (request, response) => {
+    const { title } = request.query;
+    if (!title) {
+        return response.status(400).json({ error: 'Title parameter is required' });
+    }
+
+    const sql = `SELECT * FROM movies WHERE title = ?`;
+    try {
+        const movie = await new Promise((resolve, reject) => {
+            db.get(sql, [title], (err, row) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(row);
+                }
+            });
+        });
+
+        if (movie) {
+            response.json(movie);
+        } else {
+            response.status(404).json({ error: 'Movie not found' });
+        }
+    } catch (err) {
+        console.error(err.message);
+        response.status(500).json({ error: err.message });
+    }
+});
+
+
 module.exports = router;

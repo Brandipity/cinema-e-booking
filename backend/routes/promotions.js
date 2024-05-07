@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/database');
-const { sendPromotionEmail } = require('./emailSender'); // Import the sendPromotionEmail function
+//const { sendPromotionEmail } = require('./emailSender'); // Import the sendPromotionEmail function
 
 // add a new promotion
 router.post('/', async (request, response) => {
@@ -21,7 +21,7 @@ router.post('/', async (request, response) => {
         const newPromotionId = dbResponse.lastID;
 
         // Send promotion email
-        await sendPromotionEmail(promoCode); 
+      //  await sendPromotionEmail(promoCode);
 
         response.json({ message: 'Promo added successfully' });
     } catch (error) {

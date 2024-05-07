@@ -17,7 +17,7 @@ function ManageShowings() {
 
   const fetchShowings = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/api/showings');
+      const response = await axios.get('http://localhost:3001/api/screenings');
       setShowings(response.data);
     } catch (error) {
       console.error('Error fetching showings:', error);
@@ -31,23 +31,32 @@ function ManageShowings() {
   const handleAddShowing = async (e) => {
     e.preventDefault();
 
+    const formattedData = {
+      movieId: newShowing.movie_id,
+      screeningStart: newShowing.screening_start,
+      theaterNumber: newShowing.theater_number,
+      seatsAvailable: newShowing.seats_available
+    };
+    // debug
+    //console.log("Sending data:", formattedData);
+
     try {
-      const response = await axios.post('http://localhost:3001/api/screenings', newShowing);
+      const response = await axios.post('http://localhost:3001/api/screenings', formattedData);
       setShowings([...showings, response.data]);
       setNewShowing({
         movie_id: '',
-        screening_start: '',
         theater_number: '',
+        screening_start: '',
         seats_available: '',
       });
     } catch (error) {
-      console.error('Error adding showing:', error.response.data);
+      console.error('Error adding showing:', error.response ? error.response.data : error);
     }
   };
 
   const handleDeleteShowing = async (screening_id) => {
     try {
-      await axios.delete(`http://localhost:3001/api/showings/${screening_id}`);
+      await axios.delete(`http://localhost:3001/api/screenings/${screening_id}`);
       setShowings(showings.filter((showing) => showing.screening_id !== screening_id));
     } catch (error) {
       console.error('Error deleting showing:', error);

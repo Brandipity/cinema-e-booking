@@ -4,15 +4,15 @@ const db = require('../db/database');
 
 // create a new cart
 router.post('/', (request, response) => {
-    const { userId } = request.body;
+    const { userId, bookingId } = request.body;
 
-    if (!userId) {
+    if (!userId || !bookingId) {
         return response.status(400).json({ error: 'Missing required field: userId' });
     }
 
-    const sql = `INSERT INTO carts (user_id, created_at) VALUES (?, datetime('now'))`;
+    const sql = `INSERT INTO carts (user_id, created_at, booking_id) VALUES (?, datetime('now'), ?)`;
 
-    db.run(sql, [userId], function(err) {
+    db.run(sql, [userId, bookingId], function(err) {
         if (err) {
             console.error(err.message);
             response.status(500).json({ error: err.message });

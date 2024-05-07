@@ -5,19 +5,19 @@ const db = require('../db/database');
 // creating a booking
 
 router.post('/', (request, response) => {
-    const { userId, screeningId, numSeats, bookingTime } = request.body;
+    const { userId, screeningId, numSeats, bookingTime, seat } = request.body;
 
-    if (!userId || !screeningId || !numSeats) {
+    if (!userId || !screeningId || !numSeats || !seat) {
         return response.status(400).json({ error: 'Missing required fields' });
     }
 
     // fallback to current time if booking time is absent
     const time = bookingTime || new Date().toISOString();
 
-    const sql = `INSERT INTO bookings (user_id, screening_id, num_seats, booking_time) VALUES (?, ?, ?, ?)`;
+    const sql = `INSERT INTO bookings (user_id, screening_id, num_seats, booking_time, seat) VALUES (?, ?, ?, ?, ?)`;
 
     // added more graceful error handling
-    db.run(sql, [userId, screeningId, numSeats, time], function(err) {
+    db.run(sql, [userId, screeningId, numSeats, time, seat], function(err) {
         if (err) {
             console.error(err.message);
             response.status(500).json({ error: err.message });
