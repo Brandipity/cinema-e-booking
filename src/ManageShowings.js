@@ -76,7 +76,9 @@ function ManageShowings() {
             <a href="/admin"> Admin </a>
           </div>
         </nav>
+        <div className="manage-showings">
         <h2>Manage Showings</h2>
+        </div>
         <form onSubmit={handleAddShowing}>
           <input
               type="number"
@@ -112,12 +114,11 @@ function ManageShowings() {
           />
           <button type="submit">Add Showing</button>
         </form>
-
         <h3>Showings</h3>
         <ul>
           {showings.map((showing) => (
               <li key={showing.screening_id}>
-                <div>
+                <div className="showings">
                   <span>Movie ID: {showing.movie_id}</span>
                   <p>Screening Start: {showing.screening_start}</p>
                   <p>Theater Number: {showing.theater_number}</p>
