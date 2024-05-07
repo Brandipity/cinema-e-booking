@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './CreateAccount.css';
 import axios from 'axios';
 
+
 import {sendConfirmationEmail} from './emailSender';
 
 function CreateAccount() {
