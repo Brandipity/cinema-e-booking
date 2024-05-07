@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import emailjs from 'emailjs-com'; // Import emailjs-com library
 import './ManagePromotions.css';
+
 
 function ManagePromotions() {
   const [promotions, setPromotions] = useState([]);
@@ -50,10 +52,25 @@ function ManagePromotions() {
         validFrom: '',
         validUntil: '',
       });
+      // Send promotion email after adding a new promotion
+      await sendPromotionEmail(promoCode);
     } catch (err) {
       console.error('Error adding promotion:', err.response.data);
     }
   };
+  // Function to send promotion email
+  const sendPromotionEmail = async (promoCode) => {
+    const promotionContent = `We have added a new promotion! Use promo code ${promoCode} for discounts.`;
+    const templateParams = { promotion_content: promotionContent };
+
+    try {
+      await emailjs.send('your_service_id', 'your_template_id', templateParams, 'your_user_id');
+      console.log('Promotion email sent successfully');
+    } catch (error) {
+      console.error('Error sending promotion email:', error);
+    }
+  };
+
 
 
   const handleDeletePromotion = async (promo_id) => {

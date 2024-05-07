@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/database');
-//const { sendPromotionEmail } = require('./emailSender'); // Import the sendPromotionEmail function
 
 // add a new promotion
 router.post('/', async (request, response) => {
@@ -20,16 +19,11 @@ router.post('/', async (request, response) => {
         const dbResponse = await db.run(sql, [promoCode, description, discountPercentage, validFrom, validUntil]);
         const newPromotionId = dbResponse.lastID;
 
-        // Send promotion email
-      //  await sendPromotionEmail(promoCode);
-
         response.json({ message: 'Promo added successfully' });
     } catch (error) {
         console.error('Error adding promotion:', error);
         response.status(500).json({ error: 'Internal server error' });
     }
 });
-
-//add endpoint for fetching all promotions
 
 module.exports = router;
