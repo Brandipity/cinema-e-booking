@@ -10,6 +10,10 @@
     min-height: 100vh;
 }
 
+.promo {
+    color: black
+}
+
 .manage-promotions .navbar {
     background-color: #1e88e5;
     color: white;
