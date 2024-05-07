@@ -135,8 +135,8 @@ function TicketBooking() {
                     <input type="text" placeholder="Search" />
                 </div>
                 <div className="navbar-right">
-                    <a href="#">Home</a>
-                    <a href="#">Showings</a>
+                    <a href="/registereduser">Home</a> //these take us to the same place
+                    <a href="/registereduser">Showings</a>
                     <a href="/login">Login</a>
                     <a href="/cart">Cart</a>
                 </div>
