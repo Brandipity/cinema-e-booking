@@ -7,7 +7,6 @@ function AdminCreateAccount() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false); // State for admin status
   const navigate = useNavigate();
 
   // Function to handle admin account creation
@@ -16,8 +15,7 @@ function AdminCreateAccount() {
     try {
       const adminData = {
         username,
-        password,
-        isAdmin // Include isAdmin field in the request
+        password
       };
 
       const response = await axios.post('http://localhost:3001/api/admins', adminData);
@@ -82,12 +80,6 @@ function AdminCreateAccount() {
         </div>
 
         {/* Promotion Section */}
-        {isAdmin && (
-          <div className="promote-user-section">
-            <h2>Promote User to Admin</h2>
-            <button onClick={() => promoteUserToAdmin(userId)}>Promote User</button>
-          </div>
-        )}
       </div>
     </div>
   );

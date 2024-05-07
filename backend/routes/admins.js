@@ -5,18 +5,18 @@ const bcrypt = require('bcrypt');
 
 // add an admin
 router.post('/', async (request, response) => {
-    const { username, password, isAdmin } = request.body; // Receive isAdmin from frontend
+    const { username, password} = request.body; // Receive isAdmin from frontend
 
-    if (!username || !password || isAdmin === undefined) { // Check for missing fields
+    if (!username || !password) { // Check for missing fields
         return response.status(400).json({ error: 'Missing required fields' });
     }
 
     try {
         const passwordHash = await bcrypt.hash(password, 10);
 
-        const sql = `INSERT INTO admins (username, password_hash, isAdmin) VALUES (?, ?, ?)`; // Update SQL query
+        const sql = `INSERT INTO admins (username, password_hash) VALUES (?, ?)`; // Update SQL query
 
-        db.run(sql, [username, passwordHash, isAdmin], function(err) {
+        db.run(sql, [username, passwordHash], function(err) {
             if (err) {
                 console.error(err.message);
                 response.status(500).json({ error: err.message });

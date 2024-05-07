@@ -30,5 +30,6 @@ router.post('/', async (request, response) => {
     }
 });
 
+//add endpoint for fetching all promotions
 
 module.exports = router;
