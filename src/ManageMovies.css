@@ -13,7 +13,7 @@
 .manage-movies .navbar {
     background-color: #1e88e5;
     color: white;
-    padding: 20px;
+    padding: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,7 +33,7 @@
 .manage-movies .navbar-right a,
 .manage-movies .navbar-right button {
     color: white;
-    margin-left: 20px;
+    margin-left: flex;
     text-decoration: none;
     cursor: pointer;
     font-size: 1.1em;

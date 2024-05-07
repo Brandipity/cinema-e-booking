@@ -19,6 +19,7 @@ import ConfirmationPage from './ConfirmationPage';
 import ConfirmationSent from './ConfirmationSent';
 import ResetPassword from './ResetPassword';
 import ManageShowings from './ManageShowings';
+import ManageUsers from './ManageUsers';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route path="/confirm/:token" element={<ConfirmationPage />} />
             <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
             <Route path="/confirmation-sent" element={<ConfirmationSent />} />
+            <Route path="/manageusers" element={<ManageUsers />} />
           </Routes>
         </Router>
   );

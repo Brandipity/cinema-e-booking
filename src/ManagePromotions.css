@@ -52,6 +52,7 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
+    text-decoration-color:#333;
 }
 
 .manage-movies h2 {

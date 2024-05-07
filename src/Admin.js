@@ -25,7 +25,7 @@ function Admin() {
           {/* add movie api stuff below each */}
         </div>
         <div className="admin-option">
-            <button><Link to="/managemovies">Manage Users</Link></button> {/*Create a 'Manage Users' page later. This is a placeholder.*/}
+            <button><Link to="/manageusers">Manage Users</Link></button> {/*Create a 'Manage Users' page later. This is a placeholder.*/}
             <p>Edit or delete user accounts.</p>
             {/* add movie api stuff below each */}
         </div>
