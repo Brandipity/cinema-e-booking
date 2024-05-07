@@ -144,7 +144,7 @@ function ManagePromotions() {
           <ul>
             {promotions.map((promotion) => (
                 <li key={promotion.promo_id}>
-                  <div>
+                  <div class="promo">
                     <span>{promotion.promo_code}</span>
                     <p>{promotion.description}</p>
                     <p>Discount: {promotion.discount_percentage * 100}%</p>
