@@ -8,7 +8,6 @@ async function sendPromotionEmail(promoCode) {
     };
 
     try {
-        // Use your email service's API to send the email
         await emailjs.send('service_pfnvmol', 'template_uyzt4iv', templateParams, '0yAX7vO20pm2Hs_Ye');
         console.log('Promotion email sent successfully');
     } catch (error) {
@@ -16,21 +15,4 @@ async function sendPromotionEmail(promoCode) {
     }
 }
 
-async function sendConfirmationEmail(email, username, confirmationToken) {
-    const confirmationUrl = `http://localhost:3000/confirm/${confirmationToken}`;
-
-    const templateParams = {
-        to_email: email,
-        username: username,
-        confirmation_url: confirmationUrl,
-    };
-
-    try {
-        await emailjs.send('service_pfnvmol', 'template_uyzt4iv', templateParams, '0yAX7vO20pm2Hs_Ye');
-        console.log('Confirmation email sent successfully');
-    } catch (error) {
-        console.error('Error sending confirmation email:', error);
-    }
-}
-
-export { sendPromotionEmail, sendConfirmationEmail };
+export default sendPromotionEmail;
