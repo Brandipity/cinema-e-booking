@@ -1,37 +1,37 @@
-.manage-movies {
+.manage-promotions {
     margin: 0;
     font-family: 'Roboto', sans-serif;
     background-color: #f5f5f5;
 }
 
-.manage-movies .App {
+.manage-promotions .App {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-.manage-movies .navbar {
+.manage-promotions .navbar {
     background-color: #1e88e5;
     color: white;
-    padding: 20px;
+    padding: 8 px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.manage-movies .navbar-left span {
+.manage-promotions .navbar-left span {
     font-size: 1.5em;
     font-weight: bold;
 }
 
-.manage-movies .navbar-center input {
+.manage-promotions .navbar-center input {
     padding: 10px;
     border: none;
     border-radius: 4px;
 }
 
-.manage-movies .navbar-right a,
-.manage-movies .navbar-right button {
+.manage-promotions .navbar-right a,
+.manage-promotions .navbar-right button {
     color: white;
     margin-left: 20px;
     text-decoration: none;
@@ -39,29 +39,29 @@
     font-size: 1.1em;
 }
 
-.manage-movies .navbar-right button {
+.manage-promotions .navbar-right button {
     background-color: #1565c0;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
 }
 
-.manage-movies .main-content {
+.manage-promotions .main-content {
     flex-grow: 1;
     padding: 40px;
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
-    text-decoration-color:#333;
+    color:#333;
 }
 
-.manage-movies h2 {
+.manage-promotions h2 {
     margin: 0;
     font-size: 2em;
     color: #1e88e5;
 }
 
-.manage-movies form {
+.manage-promotions form {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 20px;
@@ -71,7 +71,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.manage-movies form input {
+.manage-promotions form input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -79,7 +79,7 @@
     box-sizing: border-box;
 }
 
-.manage-movies form button {
+.manage-promotions form button {
     background-color: #1e88e5;
     color: white;
     border: none;
@@ -89,13 +89,13 @@
     font-size: 1.1em;
 }
 
-.manage-movies h3 {
+.manage-promotions h3 {
     margin: 0 0 20px 0;
     font-size: 1.5em;
     color: #1565c0;
 }
 
-.manage-movies ul {
+.manage-promotions ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -104,7 +104,7 @@
     gap: 20px;
 }
 
-.manage-movies li {
+.manage-promotions li {
     background-color: #fff;
     padding: 20px;
     border-radius: 4px;
@@ -114,13 +114,13 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.manage-movies li span {
+.manage-promotions li span {
     font-size: 1.2em;
     color: #333;
 }
 
-.manage-movies li button {
-    background-color: #f44336;
+.manage-promotions li button {
+    background-color: #990000;
     color: white;
     border: none;
     padding: 10px 20px;

@@ -83,7 +83,7 @@ function ManagePromotions() {
   };
 
   return (
-      <div className="manage-movies">
+      <div className="manage-promotions">
         <nav className="navbar">
           <div className="navbar-left">
             <span>E-CINEMA</span>
@@ -154,8 +154,8 @@ function ManagePromotions() {
                 </li>
             ))}
           </ul>
+          </div>
         </div>
-      </div>
   );
 }
 
