@@ -29,7 +29,7 @@ class API {
     // Grabs the 'Upcoming' collection (or at least the first page of it, which can be adjusted)
     // Documentation: https://developer.themoviedb.org/reference/movie-upcoming-list
     static fetchComingSoonMovies() {
-        return fetch(`${API_URL}/movie/upcoming?language=en-US&page=2`, options)
+        return fetch(`${API_URL}/movie/upcoming?language=en-US&page=1`, options)
             .then(response => response.json())
             .then(data => data)
             .catch(err => console.error(err));

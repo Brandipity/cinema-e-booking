@@ -57,29 +57,6 @@ router.get('/now-playing', (request, response) => {
         });
 });
 
-// fetch upcoming movies
-// fully doesn;t wrk but the idea is there...
-router.get('/upcoming', (request, response) => {
-    const sql = `SELECT * FROM movies WHERE release_date > '2024-04-30'`;
-    // wrapped in a promise call, API will return null otherwise
-    new Promise((resolve, reject) => {
-        db.all(sql, [], (err, movies) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(movies);
-            }
-        });
-    })
-        .then(movies => {
-            response.json(movies);
-        })
-        .catch(err => {
-            console.error(err.message);
-            response.status(500).send("Failed to fetch current movies");
-        });
-});
-
 
 router.get('/find-by-title', async (request, response) => {
     const { title } = request.query;

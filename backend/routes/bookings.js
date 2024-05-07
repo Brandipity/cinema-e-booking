@@ -81,5 +81,19 @@ router.delete('/:bookingId', (request, response) => {
     });
 });
 
+router.get('/unconfirmed/:userId', (request, response) => {
+    const { userId } = request.params;
+
+    const sql = `SELECT * FROM bookings WHERE user_id = ? AND confirmed = 0`;
+
+    db.all(sql, [userId], (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            response.status(500).json({ error: 'Failed to retrieve bookings' });
+            return;
+        }
+        response.json(rows);
+    });
+});
 
 module.exports = router;

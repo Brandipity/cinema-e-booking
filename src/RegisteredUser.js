@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Movie from './Movie';
 import './GuestPage.css';
+import API from "./API";
 
 function RegisteredUser() {
   const [currentMovies, setCurrentMovies] = useState([]);
@@ -22,10 +23,13 @@ function RegisteredUser() {
         .catch(err => console.error("Failed to fetch current movies:", err));
 
     // fetch upcoming movies
-    fetch('http://localhost:3001/api/movies/upcoming')
-        .then(response => response.json())
-        .then(data => setUpcomingMovies(data || []))
-        .catch(err => console.error("Failed to fetch upcoming movies:", err));
+
+      API.fetchComingSoonMovies()
+          .then(data => {
+              console.log(data);
+              setUpcomingMovies(data.results || []);
+          })
+          .catch(err => console.error("Failed to fetch upcoming movies:", err));
   }, []);
 
   const handleSearchChange = (event) => {
